@@ -12,6 +12,7 @@ for rid in $(printf '%s\n' "$users" | awk -F'[][ ]+' '/svc_/ {print $4}'); do
     break
   fi
 done
+rpcclient -N -U "" files.carmichael.lab -c "getdompwinfo" > results/4-password_policy.txt 2>/dev/null
 minlen=$(python3 - <<'PY'
 from impacket.dcerpc.v5 import samr, transport
 t = transport.SMBTransport("files.carmichael.lab", 445, r"\samr", "", "", "", "", "", "", "", doKerberos=False)
