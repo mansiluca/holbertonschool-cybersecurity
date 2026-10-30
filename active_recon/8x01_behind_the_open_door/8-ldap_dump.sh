@@ -29,4 +29,7 @@ for candidate in $(awk -F'\t' -v a="$account" '$2 == a {print $1}' tmp_ldap/memb
 done
 [ -z "$group" ] && group=$(awk -F'\t' '{print $1}' tmp_ldap/members.tsv | sort -u | head -n 1)
 
-printf '%s\n%s\n' "$users" "$group" | tee results/8-ldap_dump.txt
+echo "$users" > results/8-ldap_dump.txt
+echo "$group" >> results/8-ldap_dump.txt
+echo "$users"
+echo "$group"
