@@ -1,0 +1,12 @@
+#!/bin/bash
+mkdir -p results 2>/dev/null
+ip=$(getent hosts files.carmichael.lab | awk 'NF {print $1; exit}')
+host=${ip:-files.carmichael.lab}
+shares=$(smbclient -L "$host" -N 2>/dev/null)
+rpcclient -N -U "" "$host" -c "enumdomusers" > results/1-user_list_refused.txt 2>/dev/null
+server=$(rpcclient -N -U "" "$host" -c srvinfo 2>/dev/null)
+domain=$(printf '%s\n' "$server" | grep -E 'Domain|Workgroup|CARMICHAEL' | awk 'NF {print $1; exit}')
+share=$(printf '%s\n' "$shares" | grep 'Disk' |
+  awk '$1 != "IPC$" && $1 != "ADMIN$" && $1 != "C$" {print $1; exit}')
+printf '%s\n%s\n' "$share" "$domain" > results/1-smb_null_session.txt 2>/dev/null
+printf '%s\n%s\n' "$share" "$domain"

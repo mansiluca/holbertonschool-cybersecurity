@@ -3,6 +3,7 @@ mkdir -p results tmp_ldap
 basedn=$(sed -n '2p' results/2-snmp_ldap_unauth.txt 2>/dev/null)
 [ -z "$basedn" ] && { echo "no base DN from task 2" >&2; exit 1; }
 ldapsearch -x -LLL -H ldap://directory.carmichael.lab -b "$basedn" "(objectClass=*)" > tmp_ldap/dump.ldif 2>/dev/null
+organizationalUnit=$(grep -c '^objectClass: organizationalUnit' tmp_ldap/dump.ldif)
 users=$(grep -c '^objectClass: inetOrgPerson' tmp_ldap/dump.ldif)
 
 awk '
