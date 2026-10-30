@@ -3,7 +3,7 @@ mkdir -p results tmp_ldap
 basedn=$(sed -n '2p' results/2-snmp_ldap_unauth.txt 2>/dev/null)
 [ -z "$basedn" ] && { echo "no base DN from task 2" >&2; exit 1; }
 ldapsearch -x -LLL -H ldap://directory.carmichael.lab -b "$basedn" "(objectClass=*)" > tmp_ldap/dump.ldif 2>/dev/null
-count=$(grep -c '^objectClass: inetOrgPerson' tmp_ldap/dump.ldif)
+users=$(grep -c '^objectClass: inetOrgPerson' tmp_ldap/dump.ldif)
 
 awk '
   /^dn: uid=/ { sub(/^dn: uid=/, "", $0); split($0, a, ","); uid = a[1]; next }
@@ -25,4 +25,4 @@ for candidate in $(awk -F'\t' -v a="$account" '$2 == a {print $1}' tmp_ldap/memb
 done
 [ -z "$group" ] && group=$(awk -F'\t' '{print $1}' tmp_ldap/members.tsv | sort -u | head -n 1)
 
-printf '%s\n%s\n' "$count" "$group" | tee results/8-ldap_dump.txt
+printf '%s\n%s\n' "$users" "$group" | tee results/8-ldap_dump.txt

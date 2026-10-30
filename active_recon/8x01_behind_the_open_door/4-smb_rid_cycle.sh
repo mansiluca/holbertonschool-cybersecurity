@@ -13,7 +13,10 @@ for rid in $(printf '%s\n' "$users" | awk -F'[][ ]+' '/svc_/ {print $4}'); do
   fi
 done
 rpcclient -N -U "" files.carmichael.lab -c "getdompwinfo" > results/4-password_policy.txt 2>/dev/null
-minlen=$(python3 - <<'PY'
+minlen=$(awk -F': ' '/min_password_length/ {gsub(/ /, "", $2); print $2; exit}' results/4-password_policy.txt)
+case "$minlen" in
+  ""|"***")
+    minlen=$(python3 - <<'PY'
 from impacket.dcerpc.v5 import samr, transport
 t = transport.SMBTransport("files.carmichael.lab", 445, r"\samr", "", "", "", "", "", "", "", doKerberos=False)
 d = t.get_dce_rpc()
@@ -26,4 +29,6 @@ pw = samr.hSamrQueryInformationDomain(d, dh, samr.DOMAIN_INFORMATION_CLASS.Domai
 print(pw["Buffer"]["Password"]["MinPasswordLength"])
 PY
 )
+    ;;
+esac
 printf '%s\\%s\n%s\n' "$domain" "$account" "$minlen" | tee results/4-smb_rid_cycle.txt
