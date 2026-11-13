@@ -25,7 +25,15 @@ action = function(host, port)
     return stdnse.format_output(false, "no greeting from service")
   end
   banner = banner:gsub("%s+$", "")
+
+  -- parse the identifying detail out of the greeting before reporting it
+  local detail = banner
+  local _, _, name, state = banner:find("^(%S+)%s+(.+)$")
+  if name then
+    detail = name .. " " .. state
+  end
+
   local out = stdnse.output_table()
-  out["service banner"] = banner
+  out["service banner"] = detail
   return out
 end
