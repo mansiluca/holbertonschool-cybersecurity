@@ -82,51 +82,35 @@ action = function (host, port)
   nmap.registry.args.userdb = nmap.registry.args.userdb or users_path
   nmap.registry.args.passdb = nmap.registry.args.passdb or pass_path
 
-  local status, usernames = unpwdb.usernames()
-  if not status then
-    return stdnse.format_output(false, "username list unusable: " .. tostring(users_path))
-  end
-  local passwords
-  status, passwords = unpwdb.passwords()
-  if not status then
-    return stdnse.format_output(false, "password list unusable: " .. tostring(pass_path))
-  end
+  local options = { timeout = 5000 }
+  local engine = brute.Engine:new(Driver, host, port, options)
+  engine.options.script_name = SCRIPT_NAME
+  engine.options.firstonly = true
+  engine.options.useraspass = false
+  engine.options.emptypass = false
+  engine.options.max_retries = 0
+  engine.options.killstagnated = true
+  engine.options.delay = 0
 
-  local driver = Driver:new(host, port, {})
-  local connected, err = driver:connect()
-  if not connected then
-    return stdnse.format_output(false, tostring(err))
-  end
-
-  local found = creds.Credentials:new(SCRIPT_NAME, host, port)
-  local hits = {}
-  for username in usernames do
-    for password in passwords do
-      local ok, account = driver:login(username, password)
-      if ok then
-        found:add(account.username, account.password, account.state)
-        hits[#hits + 1] = string.format("%s:%s - %s", account.username, account.password,
-          creds.StateMsg[account.state] or "Valid credentials")
-        break
-      end
-      if type(account) == "table" and account.abort then
-        break
-      end
-    end
-    passwords("reset")
-    if #hits > 0 then
-      break
-    end
-  end
-  driver:disconnect()
-
-  if #hits == 0 then
+  local status, result = engine:start()
+  if type(result) ~= "table" or not result["Accounts"] then
     return stdnse.format_output(false, "no valid credentials found")
   end
 
+  -- every hit is already stored through creds; surface it and record it in the registry
+  nmap.registry.creds = nmap.registry.creds or {}
   nmap.registry.talvi = nmap.registry.talvi or {}
-  nmap.registry.talvi.creds = hits[1]:match("^([^:]+)")
-  nmap.registry.talvi.creds_pair = hits[1]:match("^([^ ]+)")
+  local hits = {}
+  for _, line in ipairs(result["Accounts"]) do
+    line = tostring(line)
+    hits[#hits + 1] = line
+    local user, password = line:match("^([^:]+):([^ ]+)")
+    if user and password then
+      nmap.registry.creds[user] = password
+      nmap.registry.talvi.creds = user
+      nmap.registry.talvi.creds_pair = string.format("%s:%s", user, password)
+    end
+  end
   nmap.registry.talvi.accounts = hits
 
   local out = stdnse.output_table()
