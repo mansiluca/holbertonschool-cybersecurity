@@ -18,26 +18,38 @@ portrule = shortport.port_or_service(8443, "https", {"tcp"})
 
 local ADVISORY_VERSION = "4.2.0"
 
-local function fetch_version(host, port)
-  local status, response = comm.tryssl(host, port,
-    "GET /version HTTP/1.0\r\nHost: talvi.example\r\nConnection: close\r\n\r\n", {})
-  if not status or not response then
-    return nil
+local FIRST_REQUEST = "GET /version HTTP/1.0\r\nHost: talvi.example\r\n\r\n"
+local PROBE_REQUEST = "GET /admin HTTP/1.0\r\nHost: talvi.example\r\nConnection: close\r\n\r\n"
+
+local function read_all(sock)
+  local chunks = {}
+  while true do
+    local status, chunk = sock:receive_buf("", true)
+    if not status or not chunk or chunk == "" then
+      break
+    end
+    chunks[#chunks + 1] = chunk
   end
-  return response:match("Talvi Gateway%s+([%d%.]+)")
+  return table.concat(chunks)
 end
 
-local function behavioral_probe(host, port)
-  local status, response = comm.tryssl(host, port,
-    "GET /admin HTTP/1.0\r\nHost: talvi.example\r\nConnection: close\r\n\r\n", {})
-  if not status or not response then
-    return false
+local function probe_gateway(host, port)
+  local sock, response = comm.tryssl(host, port, FIRST_REQUEST, {})
+  if not sock then
+    return nil
   end
-  return response:lower():match("admin panel") ~= nil
+  local body = response or ""
+  local version = body:match("Talvi Gateway%s+([%d%.]+)")
+
+  -- second request on the same session: the behaviour probe
+  local sent = sock:send(PROBE_REQUEST)
+  local probe_body = sent and read_all(sock) or ""
+  sock:close()
+  return version, probe_body
 end
 
 action = function(host, port)
-  local version = fetch_version(host, port)
+  local version, probe_body = probe_gateway(host, port)
   if not version then
     return stdnse.format_output(false, "could not read the gateway version")
   end
@@ -55,7 +67,7 @@ action = function(host, port)
   local report = vulns.Report:new(SCRIPT_NAME, host, port)
 
   -- behaviour is probed before any state is assigned
-  local probe_hit = behavioral_probe(host, port)
+  local probe_hit = probe_body:lower():match("admin panel") ~= nil
   if probe_hit then
     vuln.state = vulns.STATE.VULN
     vuln.description = string.format([[Version Talvi Gateway %s matches the
