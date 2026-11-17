@@ -50,11 +50,13 @@ def http(url, headers=None, method="GET", timeout=6):
     except (urllib.error.URLError, TimeoutError, OSError, ValueError):
         return None
 
+# four extraction families: absolute paths, call sites (fetch/axios), template
+# literals such as /api/v2/internal/${id}/exports, and full host URLs
 ROUTE_PATTERNS = [
-    re.compile(r'["\'`](/(?:api|v\d)/[A-Za-z0-9_\-/{}$.:]+)["\'`]'),
-    re.compile(r'["\'`](/[A-Za-z0-9_\-]{3,}/[A-Za-z0-9_\-.]+)["\'`]'),
+    re.compile(r'["\'`](/[A-Za-z0-9_\-]+(?:/[A-Za-z0-9_\-.]+)+)["\'`]'),
     re.compile(r'(?:fetch|axios(?:\.\w+)?)\s*\(\s*["\'`]([^"\'`]+)["\'`]'),
-    re.compile(r'["\'`]([a-z0-9.\-]*\.driftwood\.example[^"\'`]*)["\'`]'),
+    re.compile(r'["\'`](/[A-Za-z0-9_\-/]*\$\{[^}]+\}[A-Za-z0-9_\-/]*)["\'`]'),
+    re.compile(r'["\'`](https?://[^"\'`]+)["\'`]'),
 ]
 KEY_PATTERNS = [
     re.compile(r'(AKIA[0-9A-Z]{16})'),
