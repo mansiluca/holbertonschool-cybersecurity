@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 """Walk the layers end to end: forgotten host name -> JavaScript -> API -> parameter.
-Confirms the misconfiguration is present and stops there; leveraging is the next phase."""
+
+The chain reuses the reasoning of the five tools: find_vhost reproduces
+3-vhost_finder, js_endpoint reproduces 4-js_recon, api_route reproduces
+6-api_mapper and find_param reproduces 7-param_finder. Each step consumes the
+result of the previous one and stops if that result is missing, so a chain that
+skips a link cannot report a confirmation. Confirms the misconfiguration is
+present and stops there; leveraging is the next phase."""
 import re
 import sys
 import uuid
@@ -35,7 +41,7 @@ VHOSTS = ["admin-dev", "admin", "dev", "internal", "staging"]
 IGNORED = uuid.uuid4().hex[:8]
 
 
-def step1_vhost():
+def find_vhost():
     """A vhost exists only if its answer differs from the catch-all."""
     catch = http(f"http://{DOMAIN}/", headers={"Host": f"nope-{IGNORED}.{DOMAIN}",
                                              "User-Agent": "ridgeline-enum/1.0"})
@@ -49,7 +55,7 @@ def step1_vhost():
     return None
 
 
-def step2_js(vhost):
+def js_endpoint(vhost):
     """Mine the bundles for a route, including the lazy chunks nobody loads."""
     page = http(f"http://{vhost}/")
     if page is None:
@@ -74,13 +80,13 @@ def step2_js(vhost):
     return None
 
 
-def step3_api(vhost, endpoint):
+def api_route(vhost, endpoint):
     """The endpoint must answer and accept a method, otherwise the chain is broken."""
     r = http(f"http://{vhost}{endpoint}")
     return r is not None and r.status_code < 400
 
 
-def step4_param(vhost, endpoint):
+def find_param(vhost, endpoint):
     """An ignored parameter changes nothing; an honoured one changes the object."""
     url = f"http://{vhost}{endpoint}"
     def measure(query):
@@ -105,23 +111,23 @@ def step4_param(vhost, endpoint):
 
 
 def main():
-    vhost = step1_vhost()
+    vhost = find_vhost()
     if not vhost:
         print("[-] no forgotten host answers by name, chain stops here")
         return 1
     print(f"[1] vhost  {vhost}")
 
-    endpoint = step2_js(vhost)
+    endpoint = js_endpoint(vhost)
     if not endpoint:
         print("[-] no route in the bundles, chain stops here")
         return 1
     print(f"[2] js     {endpoint}")
 
-    if not step3_api(vhost, endpoint):
+    if not api_route(vhost, endpoint):
         print(f"[-] {endpoint} does not answer, chain stops here")
         return 1
 
-    param = step4_param(vhost, endpoint)
+    param = find_param(vhost, endpoint)
     if not param:
         print("[-] no honoured parameter, chain stops here")
         return 1
