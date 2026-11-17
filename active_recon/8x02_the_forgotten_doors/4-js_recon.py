@@ -22,7 +22,24 @@ class Response:
         self.text = text
 
 
+try:
+    import requests
+except ImportError:  # the lab box ships without it
+    requests = None
+
+
 def http(url, headers=None, method="GET", timeout=6):
+    if requests is not None:
+        try:
+            if method == "GET":
+                r = requests.get(url, headers=headers or {"User-Agent": "ridgeline-enum/1.0"},
+                                 timeout=timeout, allow_redirects=False)
+            else:
+                r = requests.request(method, url, headers=headers or {"User-Agent": "ridgeline-enum/1.0"},
+                                     timeout=timeout)
+            return Response(r.status_code, dict(r.headers), r.text)
+        except Exception:
+            return None
     req = urllib.request.Request(url, method=method,
                                  headers=headers or {"User-Agent": "ridgeline-enum/1.0"})
     try:
