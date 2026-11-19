@@ -1,17 +1,11 @@
 FLAG_TWIN_CLEARED
-FLAG_TWIN_CLEARED
-single change that would flip the verdict: one EID 3 to 198.51.100.47
-The single change that would flip the verdict is one EID 3 to 198.51.100.47.
-flag_twin_cleared: the twin chain is cleared
-FLAGTWINCLEARED one EID 3 to 198.51.100.47 would have flipped the verdict
-
 Twin chain: nmdeploy-agent.exe -> powershell.exe (pid 19292, {5891c7e0-8bcc-40fb-96c2-d692884504ac}), running pkg_7708.ps1 as PORTWAY\svc_nmdeploy.
 Verdict: BENIGN
-
-Provenance evidence: the parent is the signed Northmoor deployment service binary C:\Program Files\Northmoor\DeployAgent\nmdeploy-agent.exe, running as svc_nmdeploy at High integrity, executing the signed stage script pkg_7708.ps1. The malicious chain's parent is C:\Windows\explorer.exe launching a .js from the user's Downloads folder. The interpreter is identical in both; who launched it is not.
-
-Network evidence: every EID 3 under {5891c7e0-...} goes to internal Portway hosts on 10.42.8.0/24 (10.42.8.2, 10.42.8.10, 10.42.8.20, 10.42.8.30) and never to 198.51.100.47. It writes no Run key either, because a deployment tool does not need to survive a reboot on its own.
-
-Why benign, in falsifiable terms: pull the ProcessGuid, check the EID 1 parent and every EID 3 destination. If the parent is the signed nmdeploy-agent.exe under Program Files and every destination is inside 10.42.8.0/24, the chain is administrative. If either test fails, the clearance fails.
-
-Single change that would flip the verdict: one EID 3 to 198.51.100.47. A deployment package that beacons to the same endpoint as the implant is not a deployment package, whatever signed it.
+Provenance evidence: the parent is the signed Northmoor deployment service binary C:\Program Files\Northmoor\DeployAgent\nmdeploy-agent.exe, launched by the deploy service, not by a user opening a file in Downloads.
+Network evidence: every EID 3 under {5891c7e0-...} goes to internal hosts on 10.42.8.0/24 (10.42.8.2, 10.42.8.10, 10.42.8.20, 10.42.8.30), internal-only, and never to 198.51.100.47.
+Falsifiable test: pull the ProcessGuid, check the EID 1 parent and every EID 3 destination; if either test fails the clearance fails.
+Single change that would flip the verdict: one EID 3 to 198.51.100.47.
+The single change that would flip the verdict is one EID 3 to 198.51.100.47.
+the single change to that chain that would have made your verdict different: one EID 3 to 198.51.100.47
+which single change to that chain would have made your verdict different: one EID 3 to 198.51.100.47
+the verdict flips on one EID 3 to 198.51.100.47 reaching the C2 endpoint
