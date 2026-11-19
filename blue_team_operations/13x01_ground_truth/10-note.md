@@ -69,38 +69,40 @@ clearance fails. It is cleared, not quietly escalated.
 
 ## Containment, three actions
 
-**Action 1 (selected). Disable the autorun value `HKCU\...\Run\Tavistock9`, after exporting the
-key for evidence.**
-- Stops: iblenor.exe returning at next logon.
-- Business function it interrupts: none; the user's session and the dispatch software keep
-  running.
-- Visibility cost: whether the adversary re-establishes persistence by the same primitive.
+Three actions, no more, each with what it costs.
 
-**Action 2 (selected). Block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress
-gateway, organisation-wide.**
-- Stops: this implant and any sibling copy calling home.
-- Business function it interrupts: none; nothing legitimate resolves there.
-- Visibility cost: the beacon's successful check-ins. Blocked attempts still log, so I keep the
+**1. Disable the autorun value `HKCU\...\Run\Tavistock9`, after exporting the key for evidence.**
+- Stops: iblenor.exe returning at the next logon.
+- Business function interrupted: none. The user's session and the dispatch software keep running.
+- Visibility lost: whether the adversary re-establishes persistence by the same primitive.
+
+**2. Block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway,
+organisation-wide.**
+- Stops: this implant, and any sibling copy of it, calling home.
+- Business function interrupted: none. Nothing legitimate resolves there.
+- Visibility lost: the beacon's successful check-ins. Blocked attempts still log, so I keep the
   timing signal, and every other Portway workstation becomes a detector for the same
   infrastructure.
 
-**Action 3 (selected). Isolate `PORTWAY-WS-114` at the switch, keeping remote management
-access.**
-- Stops: lateral movement off a host with an interactive intrusion.
-- Business function it interrupts: a dispatch shift, which is a business cost and not an IT one
-  if this is the only station on that shift.
-- Visibility cost: live telemetry from the host.
+**3. Isolate `PORTWAY-WS-114` at the switch, keeping remote management access.**
+- Stops: lateral movement off a host that has had an interactive intrusion.
+- Business function interrupted: a dispatch shift, which is a business cost and not an IT one if
+  this is the only station on that shift.
+- Visibility lost: live telemetry from the host.
 
-**The fourth thing, if I had a fourth slot:** memory capture of `iblenor.exe` and live response
-collection instead of re-imaging. It ranked below the three because it is slow, needs a tool
-nobody has deployed on this estate, and adds attribution value only: the hash is already on the
-EID 11, the chain on the EID 1, the destination on the EID 3.
+**The fourth slot: memory capture of `iblenor.exe` and live response collection instead of
+re-imaging.** It ranked below the three on comparison, not on the limit. Against 1 and 2 it costs
+time and needs a tool nobody has deployed on this estate, while both of those are free to the
+business and take minutes. Against 3 it buys attribution rather than containment, and the
+artefacts it would recover are already documented: the hash is on the EID 11, the chain on the
+EID 1, the destination on the EID 3. If I had to spend a slot on evidence over control, 3 would
+still outrank it, because isolating stops movement while collection only explains it.
 
 ## Cut now or watch
 
-My call is to watch, bounded to one shift, with a decision at the end of it: cut the C2 at the
-network now, leave the host running and monitored, and hold isolation until shift change unless
-a trigger fires.
+My call is to watch, bounded to one shift, with a decision at the end of it: put action 2 in place
+now, leave the host running and monitored, and hold action 3 until shift change unless a trigger
+fires.
 
 Cutting the beacon ends the exposure and ends the view in the same moment. I would stop seeing
 whether the implant fetches a second stage and which other hosts it reaches, and that second
