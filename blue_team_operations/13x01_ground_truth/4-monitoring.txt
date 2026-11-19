@@ -1,17 +1,21 @@
-C:\Users\sdumont\AppData\Roaming: user-writable profile path where the payload iblenor.exe was dropped (EID 11); a new executable here is this case's signature
-C:\Users\sdumont\AppData\Local\Temp: user-writable staging where droppers unpack before moving; nothing legitimate persists here
-C:\Users\sdumont\Downloads: arrival point of the lure PORTWAY-DISPATCH-UPDATE.js, which was executed from here; a new script here starts the next case
-C:\Users\Public: writable by any local user with no profile; shared drop location when the user's own directory is watched
-C:\ProgramData: broadly writable staging used by deployment tooling and attackers alike; changes here must be attributable to a package
-C:\Users\sdumont\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup: per-user autostart; anything placed here runs at logon without privilege
-C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup: all-users autostart, same primitive with a wider blast radius
-C:\Windows\System32\Tasks: scheduled-task store, persistence surviving reboot without a service account
-HKLM\Software\Microsoft\Windows\CurrentVersion\Run: machine-wide autorun, the strongest Run-key primitive on the host
-HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce: machine-wide one-shot autorun, typical staging of a second stage
-HKCU\Software\Microsoft\Windows\CurrentVersion\Run: per-user autorun; the intrusion wrote Tavistock9 here pointing at iblenor.exe, so this key is mandatory for this case
-HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Run: the same key family across every loaded hive, so a write in any profile is seen
-Sysmon EID 1 process creation with command line: lineage is decided by parent image and command line; without them powershell.exe looks identical on both chains
-Sysmon EID 11 file creation with hashes: a dropped binary is evidence only if its hash is pinned to the ProcessGuid that wrote it
-Sysmon EID 13 registry value set: autorun persistence is a registry value and no other stream shows it being set
-Sysmon EID 3 network connection with destination hostname: the C2 is identified by where a process talked, not by its name
-Windows audit policy, process creation with command line: so the trail survives the agent being uninstalled or the host re-imaged
+C:\Users\*\AppData\Roaming - every profile's roaming folder, not just sdumont's; this is where iblenor.exe landed (EID 11) and where a dropper will land next time, under whatever account is logged on
+C:\Users\*\AppData\Local\Temp - user-writable staging for every profile; droppers unpack here before moving and nothing legitimate persists
+C:\Users\*\AppData\Local\Microsoft\Windows\INetCache - where a browser-downloaded lure lands before the user opens it; the .js in this case arrived through a user double-click
+C:\Users\*\Downloads - arrival point of PORTWAY-DISPATCH-UPDATE.js, executed at 07:55:00; a new script here is how the next case starts
+C:\Users\Public - writable by any local account with no profile; the shared drop used when the user's own AppData is being watched
+C:\Windows\Temp - writable staging outside every profile, used when the attacker has local admin or a service context
+C:\ProgramData - writable staging shared by the Northmoor deploy agent and by attackers, so a change here must be attributable to a package like pkg_7708
+C:\Users\*\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup - per-user autostart for every profile; an alternative to the Run key, needing no privilege
+C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup - all-users autostart, the same primitive with a wider blast radius
+C:\Windows\System32\Tasks and C:\Windows\SysWOW64\Tasks - scheduled-task store; seven tasks predate the incident window, so additions or edits are the change worth seeing
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run - machine-wide autorun, the strongest Run-key primitive on the host
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce - machine-wide one-shot autorun, typical staging of a second stage
+HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Run and HKEY_CURRENT_USER equivalent - the key the intrusion wrote (Tavistock9 -> AppData\Roaming\iblenor.exe); watching the wildcard covers a write in any loaded hive
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon - Shell and Userinit values; the persistence path that survives when Run keys are cleaned
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services - service creation and image-path changes; the persistence an attacker uses once they have local admin
+Sysmon EID 1 with command line - the two powershell.exe in this case share image and MD5 121E1253E10DBE8D2D06AAE33EDBC859; only parent image and command line separate the lure chain from the deployment chain
+Sysmon EID 11 with hashes - iblenor.exe (SHA-256 d13e0265140f33bc79de76e6c31708138443510e9d44184f5acd44ea7a88c6b2) is evidence because its hash is pinned to the ProcessGuid that wrote it
+Sysmon EID 13 - the Tavistock9 value only exists in this stream; file monitoring alone would have missed the persistence entirely
+Sysmon EID 3 with destination hostname - the two chains differ by destination, 198.51.100.47 external versus 10.42.8.0/24 internal, and pkg_7714 was decided on that single connection
+Windows audit policy, process creation with command line - so the trail outlives the agent and the re-image
+Excluded on purpose: C:\Windows\WinSxS, C:\Windows\SoftwareDistribution, C:\Windows\servicing, pagefile and hiberfil - they churn on every update and would bury the Tavistock9 signal; whole-disk monitoring is not a decision
