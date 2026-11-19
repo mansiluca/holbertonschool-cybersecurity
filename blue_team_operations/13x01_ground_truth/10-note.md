@@ -27,11 +27,13 @@ asking for elevation.
 (`cdn-halcyon-sync.example`) over tcp/443 at 16:15:33.738, on a steady interval (T1071.001).
 A regular cadence to one external host is the beacon.
 
-Artefacts: agent 001; lure `PORTWAY-DISPATCH-UPDATE.js`; payload `iblenor.exe`, SHA-256
-`d13e0265140f33bc79de76e6c31708138443510e9d44184f5acd44ea7a88c6b2`; run value `Tavistock9`; C2
-`198.51.100.47` (`cdn-halcyon-sync.example:443`); ProcessGuids `{bd691e28-...}`, `{a0e0be61-...}`,
-`{ec443170-...}`. The interpreter MD5 `121E1253E10DBE8D2D06AAE33EDBC859` is shared with the admin
-chain and identifies nothing.
+Artefacts by identifier: agent 001 on PORTWAY-WS-114; lure
+`C:\Users\sdumont\Downloads\PORTWAY-DISPATCH-UPDATE.js`; payload
+`C:\Users\sdumont\AppData\Roaming\iblenor.exe`, SHA-256
+`d13e0265140f33bc79de76e6c31708138443510e9d44184f5acd44ea7a88c6b2`; run value `Tavistock9`;
+C2 `198.51.100.47` / `cdn-halcyon-sync.example:443`; ProcessGuids `{bd691e28-...}`,
+`{a0e0be61-...}`, `{ec443170-...}`. The interpreter image and its MD5
+`121E1253E10DBE8D2D06AAE33EDBC859` are shared with legitimate activity and identify nothing.
 
 ## The node I had to work for
 
@@ -40,12 +42,15 @@ chain and identifies nothing.
 Its lineage fits a malicious loader and a legitimate installer equally well, so the tree could
 not settle it.
 
-Before looking, I wrote what would settle it each way. Malicious: an EID 3 to `198.51.100.47`,
-since a deployment package has no reason to reach the attacker endpoint. Benign: EID 3 only to
-`10.42.8.0/24` as `pkg_7708` does, plus a validating Northmoor manifest. My confidence was 60/40
-against. What settled it was EID 3 to `198.51.100.47` tcp/443 at 13:00:01: verdict malicious,
-confidence high. My malicious prediction landed; the benign one was not foolish, it simply did
-not happen, and the difference between the two packages is that connection.
+Before looking, I wrote down what would settle it in each direction. Malicious: an EID 3 to
+`198.51.100.47`, because a deployment package has no reason to reach the attacker endpoint.
+Benign: EID 3 only to internal hosts on `10.42.8.0/24` as the genuine package `pkg_7708` does,
+plus a validating Northmoor manifest. My confidence was no better than 60/40 against.
+
+What settled it: EID 3 by `{49fb0168-...}` to `198.51.100.47` tcp/443 at 13:00:01. Verdict
+malicious, confidence high. My malicious prediction was the one that landed. The benign
+prediction was not foolish, it simply did not happen, and the difference between the two
+packages is that single connection.
 
 ## What I cleared
 
@@ -54,39 +59,44 @@ Portway's IT runs `nmdeploy-agent.exe` from `C:\Program Files\Northmoor\DeployAg
 `{5891c7e0-8bcc-40fb-96c2-d692884504ac}`) with an encoded command and the signed stage script
 `pkg_7708.ps1`.
 
-It is benign on two testable grounds. Provenance: the parent is a signed service binary under
-`Program Files` launched by the deploy service, not a user double-clicking a file in `Downloads`.
-Network: every EID 3 goes to `10.42.8.0/24` (`10.42.8.2`, `.10`, `.20`, `.30`) and never to
-`198.51.100.47`; it writes no Run key. Pull the ProcessGuid, check the parent and every
-destination: if either test fails, the clearance fails. Cleared, not quietly escalated.
+It is benign on two grounds somebody can test. Provenance: the parent is a signed service
+binary under `Program Files` launched by the deploy service, not a user's double-click on a file
+in `Downloads`. Network: every EID 3 under `{5891c7e0-...}` goes to `10.42.8.0/24`
+(`10.42.8.2`, `10.42.8.10`, `10.42.8.20`, `10.42.8.30`) and never to `198.51.100.47`. It writes
+no Run key, because a deployment tool does not need to survive a reboot on its own. Pull the
+ProcessGuid, check the EID 1 parent and every EID 3 destination: if either test fails, the
+clearance fails. It is cleared, not quietly escalated.
 
 ## Containment, three actions
 
-**Action 1, disable the autorun value `HKCU\...\Run\Tavistock9`** after exporting the key. Stops:
-the implant being re-executed at the next logon, which is the attacker's only persistence.
-Interrupts: the operator's dispatch client no longer auto-starts with the profile, so it is
-launched by hand for one shift and the baseline is updated. Costs: whether the adversary
-re-establishes persistence by the same primitive, since the value is gone.
+Three actions, no more, each with what it costs.
 
-**Action 2, block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway.**
-Stops: the implant and any sibling copy calling home, which removes the control channel.
-Interrupts: a perimeter change outside the normal window, and written as a wildcard over
-`*-sync.example` it would also break neighbouring CDN names, so it must be the exact host and IP.
-Costs: the beacon's successful check-ins, though blocked attempts still log timing, and it turns
-every other Portway workstation into a detector for the same infrastructure.
+**1. Disable the autorun value `HKCU\...\Run\Tavistock9`, after exporting the key for evidence.**
+- Stops: iblenor.exe returning at the next logon.
+- Business function interrupted: none. The user's session and the dispatch software keep running.
+- Visibility lost: whether the adversary re-establishes persistence by the same primitive.
 
-**Action 3, isolate `PORTWAY-WS-114` at the switch** keeping remote management. Stops: lateral
-movement off a host with an interactive intrusion. Interrupts: the dispatch shift on that station,
-which is a business cost and not an IT one, and if it is the only station the shift stops rather
-than slows. Costs: live telemetry from the host, which is why it ranks last of the three.
+**2. Block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway,
+organisation-wide.**
+- Stops: this implant, and any sibling copy of it, calling home.
+- Business function interrupted: none. Nothing legitimate resolves there.
+- Visibility lost: the beacon's successful check-ins. Blocked attempts still log, so I keep the
+  timing signal, and every other Portway workstation becomes a detector for the same
+  infrastructure.
 
-**Rejected, the fourth action with another slot: memory capture of `iblenor.exe` and live
-response collection instead of re-imaging.** It ranked below by comparison, not because the budget
-ran out. Lower urgency: nothing in memory stops the attacker tonight, while actions 1 and 2 change
-what they can do within minutes at no business cost. Lower risk reduction: collection explains how
-the implant works, but it does not contain movement, and isolation does. Partly redundant evidence:
-the hash is on the EID 11, the chain on the EID 1, the destination on the EID 3. Trading any of the
-three for it would lose more than it gains.
+**3. Isolate `PORTWAY-WS-114` at the switch, keeping remote management access.**
+- Stops: lateral movement off a host that has had an interactive intrusion.
+- Business function interrupted: a dispatch shift, which is a business cost and not an IT one if
+  this is the only station on that shift.
+- Visibility lost: live telemetry from the host.
+
+**The fourth slot: memory capture of `iblenor.exe` and live response collection instead of
+re-imaging.** It ranked below the three on comparison, not on the limit. Against 1 and 2 it costs
+time and needs a tool nobody has deployed on this estate, while both of those are free to the
+business and take minutes. Against 3 it buys attribution rather than containment, and the
+artefacts it would recover are already documented: the hash is on the EID 11, the chain on the
+EID 1, the destination on the EID 3. If I had to spend a slot on evidence over control, 3 would
+still outrank it, because isolating stops movement while collection only explains it.
 
 ## Cut now or watch
 
