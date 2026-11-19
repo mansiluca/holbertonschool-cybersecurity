@@ -14,4 +14,5 @@ CHECK Sysmon EID 1 process creation with command line - lineage is decided by pa
 CHECK Sysmon EID 11 file creation with hashes - a dropped binary is evidence only if its hash is pinned to the ProcessGuid that wrote it
 CHECK Sysmon EID 13 registry value set - autorun persistence is a registry value and no other stream shows it being set
 CHECK Sysmon EID 3 network connection with destination hostname - the C2 is identified by where a process talked, not by its name
-CHECK Windows audit policy, process creation with command line - so the trail survives the agent being uninstalled or the host re-imaged
+CHECK Windows audit policy, process creation with command line - so the trail survives the agent being uninstalled or the host being re-imaged
+Scope boundary: whole disk, C:\Windows\System32, C:\Program Files and the system hive are deliberately not monitored, because they change on every patch cycle, bury the signal and cost the endpoint.
