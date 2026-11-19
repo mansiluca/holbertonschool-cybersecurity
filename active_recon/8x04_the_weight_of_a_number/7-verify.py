@@ -102,16 +102,34 @@ def verdict(finding, target):
     }
 
 
+def parse_args(argv):
+    """`--target host` and `--target=host` are the same request."""
+    positional, target = [], None
+    index = 0
+    while index < len(argv):
+        arg = argv[index]
+        if arg.startswith("--target="):
+            target = arg.split("=", 1)[1]
+        elif arg == "--target" and index + 1 < len(argv):
+            index += 1
+            target = argv[index]
+        elif not arg.startswith("-"):
+            positional.append(arg)
+        index += 1
+    return (positional[0] if positional else None), target
+
+
 def main():
-    args = [a for a in sys.argv[1:] if not a.startswith("-")]
-    source = args[0] if args else "outputs/triaged.json"
-    target = "db.aurumpay.example"
-    for arg in sys.argv[1:]:
-        if arg.startswith("--target"):
-            target = arg.split("=", 1)[1] if "=" in arg else None
-    if target is None:
+    source, target = parse_args(sys.argv[1:])
+    if source is None:
+        source = "needs_verification.json"
+    if not os.path.exists(source) and os.path.exists(
+            os.path.join("outputs", "needs_verification.json")):
+        source = os.path.join("outputs", "needs_verification.json")
+    if not target:
         print(
-            "Usage: ./7-verify.py <triaged.json> --target=<host>",
+            "Usage: ./7-verify.py needs_verification.json "
+            "--target <host>",
             file=sys.stderr,
         )
         return 1

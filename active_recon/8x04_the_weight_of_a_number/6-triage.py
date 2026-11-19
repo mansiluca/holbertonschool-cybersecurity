@@ -87,6 +87,11 @@ def main():
         os.makedirs("outputs", exist_ok=True)
         with open(os.path.join("outputs", "triaged.json"), "w") as handle:
             handle.write(text + "\n")
+        # the verifier consumes exactly this subset, so export it by its name
+        pending = [e for e in out if e["triage"] == "needs_verification"]
+        with open(os.path.join("outputs", "needs_verification.json"),
+                  "w") as handle:
+            handle.write(json.dumps(pending, indent=2) + "\n")
     print(text)
     return 0
 

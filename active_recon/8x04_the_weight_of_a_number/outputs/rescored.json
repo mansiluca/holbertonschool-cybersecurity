@@ -83,68 +83,6 @@
     ]
   },
   {
-    "merged_id": "V-0004",
-    "asset": "decom-07.aurumpay.example",
-    "criticality": "low",
-    "network_position": "isolated",
-    "lifecycle": "decommissioned",
-    "vector_version": "3.1",
-    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "base": 9.8,
-    "environmental": 3.4,
-    "delta": -6.4,
-    "environmental_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H/CR:L/IR:L/AR:L/MAV:L/MAC:H/MC:L/MI:L/MA:L",
-    "environmental_metrics": {
-      "CR": "L",
-      "IR": "L",
-      "AR": "L",
-      "MAV": "L",
-      "MAC": "H",
-      "MC": "L",
-      "MI": "L",
-      "MA": "L"
-    },
-    "cve": [
-      "CVE-2015-1635"
-    ],
-    "flaw": "http-sys-ms15-034",
-    "triage": "trusted",
-    "signal": "cross-scanner-agreement",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.9,
-    "sources": [
-      "nessus",
-      "openvas"
-    ]
-  },
-  {
-    "merged_id": "V-0005",
-    "asset": "internal-api.aurumpay.example",
-    "criticality": "medium",
-    "network_position": "internal-reachable",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "cert-self-signed",
-    "triage": "suspected_false_positive",
-    "signal": "cross-scanner-contradiction",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
-  },
-  {
     "merged_id": "V-0006",
     "asset": "internal-api.aurumpay.example",
     "criticality": "medium",
@@ -164,79 +102,6 @@
     },
     "confidence": 0.7,
     "sources": [
-      "openvas"
-    ]
-  },
-  {
-    "merged_id": "V-0007",
-    "asset": "internal-api.aurumpay.example",
-    "criticality": "medium",
-    "network_position": "internal-reachable",
-    "lifecycle": "active",
-    "vector_version": "3.1",
-    "vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N",
-    "base": 5.3,
-    "environmental": 5.0,
-    "delta": -0.3,
-    "environmental_vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N/CR:M/IR:M/AR:M/MAV:A/MC:L/MI:L/MA:L",
-    "environmental_metrics": {
-      "CR": "M",
-      "IR": "M",
-      "AR": "M",
-      "MAV": "A",
-      "MC": "L",
-      "MI": "L",
-      "MA": "L"
-    },
-    "flaw": "smb-signing",
-    "triage": "trusted",
-    "signal": "cross-scanner-agreement",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.9,
-    "sources": [
-      "nessus",
-      "openvas"
-    ]
-  },
-  {
-    "merged_id": "V-0008",
-    "asset": "internal-api.aurumpay.example",
-    "criticality": "medium",
-    "network_position": "internal-reachable",
-    "lifecycle": "active",
-    "vector_version": "3.1",
-    "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
-    "base": 5.9,
-    "environmental": 5.0,
-    "delta": -0.9,
-    "environmental_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N/CR:M/IR:M/AR:M/MAV:A/MC:L/MI:L/MA:L",
-    "environmental_metrics": {
-      "CR": "M",
-      "IR": "M",
-      "AR": "M",
-      "MAV": "A",
-      "MC": "L",
-      "MI": "L",
-      "MA": "L"
-    },
-    "cve": [
-      "CVE-2016-2183"
-    ],
-    "flaw": "sweet32",
-    "triage": "trusted",
-    "signal": "cross-scanner-agreement",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.9,
-    "sources": [
-      "nessus",
       "openvas"
     ]
   },
@@ -398,52 +263,6 @@
     ]
   },
   {
-    "merged_id": "V-0014",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "allowed|http|methods|options|post|trace",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.2,
-    "sources": [
-      "nikto"
-    ]
-  },
-  {
-    "merged_id": "V-0015",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "cert-expiry",
-    "triage": "suspected_false_positive",
-    "signal": "cross-scanner-contradiction",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
-  },
-  {
     "merged_id": "V-0016",
     "asset": "shop.aurumpay.example",
     "criticality": "high",
@@ -467,29 +286,6 @@
     ]
   },
   {
-    "merged_id": "V-0017",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "cookie-flags",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.2,
-    "sources": [
-      "nikto"
-    ]
-  },
-  {
     "merged_id": "V-0018",
     "asset": "shop.aurumpay.example",
     "criticality": "high",
@@ -508,75 +304,6 @@
       "target": "shop.aurumpay.example"
     },
     "confidence": 0.85,
-    "sources": [
-      "nikto"
-    ]
-  },
-  {
-    "merged_id": "V-0019",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "directory-indexing",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.4,
-    "sources": [
-      "nikto"
-    ]
-  },
-  {
-    "merged_id": "V-0020",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "etag-inode",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.2,
-    "sources": [
-      "nikto"
-    ]
-  },
-  {
-    "merged_id": "V-0021",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "header|powered|retrieved",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.2,
     "sources": [
       "nikto"
     ]
@@ -605,29 +332,6 @@
     ]
   },
   {
-    "merged_id": "V-0023",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "http-trace",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.35,
-    "sources": [
-      "nikto"
-    ]
-  },
-  {
     "merged_id": "V-0024",
     "asset": "shop.aurumpay.example",
     "criticality": "high",
@@ -651,52 +355,6 @@
     ]
   },
   {
-    "merged_id": "V-0025",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "jquery-outdated",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.2,
-    "sources": [
-      "nikto"
-    ]
-  },
-  {
-    "merged_id": "V-0026",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "missing-headers",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.2,
-    "sources": [
-      "nikto"
-    ]
-  },
-  {
     "merged_id": "V-0027",
     "asset": "shop.aurumpay.example",
     "criticality": "high",
@@ -717,29 +375,6 @@
     "confidence": 0.5,
     "sources": [
       "nessus"
-    ]
-  },
-  {
-    "merged_id": "V-0028",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "outdated-server",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.2,
-    "sources": [
-      "nikto"
     ]
   },
   {
@@ -786,105 +421,6 @@
     "confidence": 0.7,
     "sources": [
       "openvas"
-    ]
-  },
-  {
-    "merged_id": "V-0031",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": "3.1",
-    "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
-    "base": 3.4,
-    "environmental": 7.5,
-    "delta": 4.1,
-    "environmental_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N/CR:H/IR:H/AR:M/MAV:N/MC:H/MI:H/MA:L",
-    "environmental_metrics": {
-      "CR": "H",
-      "IR": "H",
-      "AR": "M",
-      "MAV": "N",
-      "MC": "H",
-      "MI": "H",
-      "MA": "L"
-    },
-    "cve": [
-      "CVE-2014-3566"
-    ],
-    "flaw": "poodle",
-    "triage": "suspected_false_positive",
-    "signal": "cross-scanner-contradiction",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.3,
-    "sources": [
-      "openvas"
-    ]
-  },
-  {
-    "merged_id": "V-0032",
-    "asset": "shop.aurumpay.example",
-    "criticality": "high",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": "3.1",
-    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
-    "base": 10.0,
-    "environmental": 10.0,
-    "delta": 0.0,
-    "environmental_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/CR:H/IR:H/AR:M/MAV:N/MC:H/MI:H/MA:L",
-    "environmental_metrics": {
-      "CR": "H",
-      "IR": "H",
-      "AR": "M",
-      "MAV": "N",
-      "MC": "H",
-      "MI": "H",
-      "MA": "L"
-    },
-    "cve": [
-      "CVE-2021-44228"
-    ],
-    "flaw": "log4shell",
-    "triage": "trusted",
-    "signal": "cross-scanner-agreement",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.95,
-    "sources": [
-      "nessus",
-      "nikto",
-      "openvas"
-    ]
-  },
-  {
-    "merged_id": "V-0033",
-    "asset": "www.aurumpay.example",
-    "criticality": "low",
-    "network_position": "internet-facing",
-    "lifecycle": "active",
-    "vector_version": null,
-    "base": null,
-    "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity as-is",
-    "flaw": "directory-indexing",
-    "triage": "suspected_false_positive",
-    "signal": "low-confidence",
-    "verification": {
-      "verified": "not-contested",
-      "evidence": "triage did not require verification",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.4,
-    "sources": [
-      "nikto"
     ]
   },
   {
