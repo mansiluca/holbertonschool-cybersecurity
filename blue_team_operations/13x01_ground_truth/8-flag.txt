@@ -1,0 +1,24 @@
+FLAG_RESOLVED
+
+Node: pkg_7714, pid 19348, ProcessGuid {49fb0168-6c51-42f0-96fe-e45280d8b907}
+User PORTWAY\svc_nmdeploy, log C:\ProgramData\Northmoor\logs\pkg_7714.log
+
+Confidence before going looking: MEDIUM, no better than 60/40 against.
+
+Predicted MALICIOUS artefact: an EID 3 from {49fb0168-...} to the external C2
+198.51.100.47 (cdn-halcyon-sync.example), which a genuine deployment package has
+no reason to make.
+
+Predicted BENIGN artefact: EID 3 from {49fb0168-...} only to internal Portway
+hosts on 10.42.8.0/24, matching the pattern of the real package pkg_7708, plus a
+Northmoor manifest whose signer validates.
+
+What I found: EID 3 by {49fb0168-6c51-42f0-96fe-e45280d8b907} to 198.51.100.47,
+hostname cdn-halcyon-sync.example, tcp/443, utcTime 2026-09-18 13:00:01.
+
+Verdict: MALICIOUS.
+
+Honesty note: my malicious prediction was the one that landed. The benign
+prediction was not wrong to make, it simply did not happen, and the difference
+between the two packages is exactly that one connection. What settled it was not
+more lineage: it was the destination.

@@ -1,0 +1,16 @@
+C:\Users\sdumont\AppData\Roaming — user-writable profile path; this is where the payload iblenor.exe landed (EID 11), so a new executable here is the drop
+C:\Users\sdumont\AppData\Local\Temp — user-writable staging; droppers unpack and stage here before moving, and nothing legitimate needs to persist
+C:\Users\sdumont\Downloads — arrival point; the lure PORTWAY-DISPATCH-UPDATE.js was executed from here
+C:\Users\Public — writable by any user without a profile; favourite shared drop location for code that must survive the user's own directory being cleaned
+C:\ProgramData — broadly writable staging that both deployment tooling and attackers use, so changes here need to be attributable
+C:\Users\sdumont\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup — per-user autostart; anything placed here runs at every logon with no privilege needed
+C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup — all-users autostart; same persistence primitive, wider blast radius
+C:\Windows\System32\Tasks — scheduled-task store; persistence that survives reboots without a service account
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run — machine-wide autorun; the strongest Run-key primitive on the host
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce — machine-wide one-shot autorun, often used to stage a second stage
+HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Run — per-user autorun for every profile; this is the key family the intrusion used (HKCU\...\Run\Tavistock9), so it must be watched per hive
+Enable Sysmon EID 1 command-line capture — lineage is decided by the parent image and the command line, and without them a process name says nothing
+Enable Sysmon EID 11 with hashes — a dropped binary is evidence only if its hash can be pinned to the chain that wrote it
+Enable Sysmon EID 3 with destination hostname — behaviour and network are half the rubric, and the C2 is identified by where a process talked, not by what it is called
+Enable Sysmon EID 13 registry-value-set — autorun persistence is a registry write, and this is the only stream that shows it
+Check the Windows audit policy for process creation with command line — the audit trail must survive the agent being uninstalled

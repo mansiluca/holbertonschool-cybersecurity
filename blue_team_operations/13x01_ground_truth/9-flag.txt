@@ -1,0 +1,29 @@
+FLAG_TWIN_CLEARED
+
+Twin chain: nmdeploy-agent.exe -> powershell.exe (pid 19292, {5891c7e0-8bcc-40fb-96c2-d692884504ac}), running pkg_7708.ps1 as PORTWAY\svc_nmdeploy.
+Verdict: BENIGN. Cleared on evidence, not escalated to be safe.
+
+## Provenance, which clears it
+The parent is the signed Northmoor deployment service binary
+`C:\Program Files\Northmoor\DeployAgent\nmdeploy-agent.exe`, running as the
+`svc_nmdeploy` service account at High integrity, executing the signed Northmoor
+stage script `pkg_7708.ps1`. The malicious chain's parent is
+`C:\Windows\explorer.exe` spawning a `.js` out of a user's `Downloads` folder.
+Nothing about the interpreter differs; everything about who launched it does.
+
+## Network, which clears it
+Every EID 3 under {5891c7e0-...} goes to internal Portway hosts on
+`10.42.8.0/24` (`10.42.8.2`, `10.42.8.10`, `10.42.8.20`, `10.42.8.30`). There is
+no external connection at all, and in particular none to `198.51.100.47`. The
+malicious chain's whole purpose was that one external connection.
+
+## Why benign, in terms somebody could disagree with
+Take the ProcessGuid, pull its EID 1 parent and every EID 3 destination. If the
+parent is the signed `nmdeploy-agent.exe` under `C:\Program Files\Northmoor\` and
+every destination is inside `10.42.8.0/24`, the chain is administrative. If either
+test fails, the clearance fails. The claim is falsifiable, which is the only kind
+of clearance worth writing.
+
+## The single change that would have flipped the verdict
+One EID 3 to `198.51.100.47`. A deployment package that beacons to the same
+endpoint as the implant is not a deployment package, whatever signed it.

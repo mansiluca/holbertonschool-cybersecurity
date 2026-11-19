@@ -1,0 +1,4 @@
+process: Sysmon EID 1 process-creation — powershell.exe launched by wscript.exe, ProcessGuid {a0e0be61-dffb-40af-9c7b-f0a6c40d4ea5} running -nop -w hidden -enc — manager receipt timestamp: 2026-10-20T03:53:24Z
+file: Sysmon EID 11 file-create — C:\Users\sdumont\AppData\Roaming\iblenor.exe written by the same ProcessGuid — manager receipt timestamp: 2026-10-20T03:53:19Z
+registry: Sysmon EID 13 registry-value-set — HKCU\Software\Microsoft\Windows\CurrentVersion\Run\Tavistock9 -> iblenor.exe — manager receipt timestamp: 2026-10-20T03:53:09Z
+network: Sysmon EID 3 network-connection — iblenor.exe to 198.51.100.47:443 (cdn-halcyon-sync.example) — manager receipt timestamp: 2026-10-24T05:31:19Z

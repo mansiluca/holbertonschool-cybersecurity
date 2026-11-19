@@ -1,0 +1,3 @@
+agent id: 001
+registered status: active
+enrollment timestamp: 2026-10-20T03:51:29Z
