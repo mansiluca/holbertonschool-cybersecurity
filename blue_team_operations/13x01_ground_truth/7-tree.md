@@ -86,6 +86,17 @@ nmdeploy-agent.exe (C:\Program Files\Northmoor\DeployAgent\, PORTWAY\svc_nmdeplo
 - network: internal only on 10.42.8.0/24, never the C2.
 - Decisive: EID 1 parentImage and parentUser.
 
+## True origin of the chain
+
+The origin is not `powershell.exe`, and it is not `iblenor.exe`. It is `wscript.exe`
+(pid 19308, `{bd691e28-1800-4e04-8f79-9ee12aeb3956}`), a binary that is supposed to spawn
+things: the Windows script host exists to run scripts, so a script host with a child is not
+unusual on its own. Somebody picked it precisely for that reason, and picked a `.js` name
+that reads like a dispatch update, because on a dispatch workstation that is the one file a
+user will open without being asked. The interpreter underneath is the shared tool that makes
+both chains look alike; the script host with a user-launched script is the choice that
+started this one.
+
 ## Shared-tool trap
 
 Both interpreters carry the same image and the same MD5, so provenance scores them identically and a rule keyed to powershell.exe cannot tell them apart. Only lineage (Downloads lure versus signed service parent), behaviour (Run key pointing at AppData versus none) and network (external C2 versus internal 10.42.8.0/24) separate them.
