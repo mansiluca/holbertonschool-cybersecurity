@@ -94,6 +94,7 @@ def main():
                 "legacy normalisation still " "processes the probe"
             )
 
+    results = []
     first = {
         "finding": "F-TLS-003",
         "class": "tls_configuration",
@@ -103,8 +104,9 @@ def main():
     }
     if tls_verdict == "unconfirmed":
         first["to_settle"] = (
-            "the gateway refused the weak protocol window " "from this host"
+            "the gateway refused the weak protocol window from this host"
         )
+    results.append(first)
     second = {
         "finding": "F-SVC-009",
         "class": "service_version",
@@ -114,9 +116,10 @@ def main():
     }
     if svc_verdict == "unconfirmed":
         second["to_settle"] = (
-            "the legacy gateway did not answer the " "normalisation probe"
+            "the legacy gateway did not answer the normalisation probe"
         )
-    print(json.dumps([first, second], indent=2))
+    results.append(second)
+    print(json.dumps(results, indent=2))
 
 
 if __name__ == "__main__":
