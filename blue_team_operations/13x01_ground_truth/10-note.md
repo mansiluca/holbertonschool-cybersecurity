@@ -69,34 +69,40 @@ clearance fails. It is cleared, not quietly escalated.
 
 ## Containment, three actions
 
-Three actions, no more, each with what it costs.
+Three actions are selected. Each one states what it stops, which legitimate business function it
+interrupts, and what evidence or future visibility it costs.
 
-**1. Disable the autorun value `HKCU\...\Run\Tavistock9`, after exporting the key for evidence.**
-- Stops: iblenor.exe returning at the next logon.
-- Business function interrupted: none. The user's session and the dispatch software keep running.
-- Visibility lost: whether the adversary re-establishes persistence by the same primitive.
+**Action 1, disable the autorun value `HKCU\...\Run\Tavistock9`** after exporting the key for
+evidence. It stops iblenor.exe from being re-executed at the next logon, which is the attacker's
+only persistence. It interrupts a real business function: the user's dispatch client stops
+auto-starting with the profile, so the operator has to launch it by hand for one shift, and the
+change has to be recorded on the workstation's configuration baseline. It costs me visibility into
+whether the adversary re-establishes persistence by the same primitive, because the value is gone
+and a re-creation attempt is what I would otherwise be watching for.
 
-**2. Block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway,
-organisation-wide.**
-- Stops: this implant, and any sibling copy of it, calling home.
-- Business function interrupted: none. Nothing legitimate resolves there.
-- Visibility lost: the beacon's successful check-ins. Blocked attempts still log, so I keep the
-  timing signal, and every other Portway workstation becomes a detector for the same
-  infrastructure.
+**Action 2, block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway.** It
+stops the implant, and any sibling copy of it, from calling home, which removes the attacker's
+control channel. It interrupts a legitimate business function at the perimeter: the rule has to be
+pushed during a change window, and written as a wildcard over `*-sync.example` it would also break
+ordinary CDN traffic on neighbouring names, so it must be the exact host and IP. It costs me the
+beacon's successful check-ins as evidence, though blocked attempts keep logging timing, and it
+turns every other Portway workstation into a detector for the same infrastructure.
 
-**3. Isolate `PORTWAY-WS-114` at the switch, keeping remote management access.**
-- Stops: lateral movement off a host that has had an interactive intrusion.
-- Business function interrupted: a dispatch shift, which is a business cost and not an IT one if
-  this is the only station on that shift.
-- Visibility lost: live telemetry from the host.
+**Action 3, isolate `PORTWAY-WS-114` at the switch** while keeping remote management access. It
+stops lateral movement off a host that has had an interactive intrusion. It interrupts the dispatch
+shift that runs on that station, which is a business cost and not an IT one, and if this is the
+only station on the shift then the shift stops rather than slows. It costs me live telemetry from
+the host, which is the reason it is the last of the three and not the first.
 
-**The fourth slot: memory capture of `iblenor.exe` and live response collection instead of
-re-imaging.** It ranked below the three on comparison, not on the limit. Against 1 and 2 it costs
-time and needs a tool nobody has deployed on this estate, while both of those are free to the
-business and take minutes. Against 3 it buys attribution rather than containment, and the
-artefacts it would recover are already documented: the hash is on the EID 11, the chain on the
-EID 1, the destination on the EID 3. If I had to spend a slot on evidence over control, 3 would
-still outrank it, because isolating stops movement while collection only explains it.
+**Rejected, the fourth action I would have taken with another slot: memory capture of `iblenor.exe`
+plus live response collection instead of re-imaging.** It ranked below the three by comparison, not
+because the budget ran out. Its urgency is lower: nothing in memory is stopping the attacker
+tonight, while actions 1 and 2 change what the attacker can do within minutes and cost the business
+nothing. Its risk reduction is lower: collection explains how the implant works and supports
+attribution, but it does not contain movement, and isolation already does that better. And its
+evidence is partly redundant, because the hash is on the EID 11, the chain on the EID 1 and the
+destination on the EID 3. If I were forced to trade one action for it, action 3 would still outrank
+it, since containment beats explanation when the beacon is live.
 
 ## Cut now or watch
 
