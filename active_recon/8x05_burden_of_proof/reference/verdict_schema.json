@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Halcyon verification verdict",
+  "description": "Every task emits one of these objects on stdout (Task 8 emits an array of two). The verdict is decided by the live target's behaviour, never hand-authored.",
+  "type": "object",
+  "required": ["finding", "class", "verdict", "evidence", "stopped_at"],
+  "properties": {
+    "finding": {"type": "string"},
+    "class": {"type": "string"},
+    "verdict": {"type": "string", "enum": ["confirmed", "false_positive", "unconfirmed"]},
+    "evidence": {"type": "object"},
+    "stopped_at": {"type": "string", "minLength": 1},
+    "to_settle": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"verdict": {"const": "unconfirmed"}}},
+      "then": {"required": ["to_settle"]}
+    }
+  ]
+}

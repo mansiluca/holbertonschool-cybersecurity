@@ -1,0 +1,168 @@
+{
+  "assessment": "Halcyon Cloud - prior vendor automated scan",
+  "note": "Scanner hypotheses only. No verdict, no proof. Each must be proven or disproven by live verification. The truth is not in this file.",
+  "findings": [
+    {
+      "id": "F-APP-007",
+      "asset": "app.halcyon.example",
+      "class": "behavioral_confirmation",
+      "claim": "Template preview parameter may evaluate expressions (component version suggests SSTI-prone engine)",
+      "endpoint": "/preview?template=",
+      "scanner_confidence": "medium",
+      "scanner_evidence": "version banner match"
+    },
+    {
+      "id": "F-WEB-002",
+      "asset": "app.halcyon.example",
+      "class": "sql_injection",
+      "claim": "Search parameter q appears injectable (server error on quote)",
+      "endpoint": "/search?q=",
+      "scanner_confidence": "high",
+      "scanner_evidence": "HTTP 500 on single quote"
+    },
+    {
+      "id": "F-WEB-014",
+      "asset": "app.halcyon.example",
+      "class": "sql_injection",
+      "claim": "Lookup parameter id may be injectable",
+      "endpoint": "/api/v1/lookup?id=",
+      "scanner_confidence": "medium",
+      "scanner_evidence": "response length anomaly"
+    },
+    {
+      "id": "F-WEB-021",
+      "asset": "app.halcyon.example",
+      "class": "xss",
+      "claim": "Reflected input on the search reflection page may reach script context",
+      "endpoint": "/reflect?search=",
+      "scanner_confidence": "medium",
+      "scanner_evidence": "input reflected in response"
+    },
+    {
+      "id": "F-WEB-033",
+      "asset": "app.halcyon.example",
+      "class": "broken_access_control",
+      "claim": "Invoice object identifier may be alterable to reach another principal's record",
+      "endpoint": "/api/v1/invoices/<id>",
+      "scanner_confidence": "low",
+      "scanner_evidence": "sequential identifiers observed"
+    },
+    {
+      "id": "F-WEB-040",
+      "asset": "app.halcyon.example",
+      "class": "path_traversal",
+      "claim": "File parameter may permit directory traversal",
+      "endpoint": "/files?file=",
+      "scanner_confidence": "medium",
+      "scanner_evidence": "dot-dot sequence not rejected"
+    },
+    {
+      "id": "F-SVC-022",
+      "asset": "halcyon.example:16379",
+      "class": "service_vulnerability",
+      "claim": "Diagnostic cache service may expose an unauthenticated code path",
+      "endpoint": "tcp/16379",
+      "scanner_confidence": "medium",
+      "scanner_evidence": "open port, service banner"
+    },
+    {
+      "id": "F-TLS-003",
+      "asset": "halcyon.example:8443",
+      "class": "tls_configuration",
+      "claim": "Internal gateway TLS endpoint may present a misconfigured certificate",
+      "endpoint": "tls/8443",
+      "scanner_confidence": "medium",
+      "scanner_evidence": "certificate anomaly"
+    },
+    {
+      "id": "F-SVC-009",
+      "asset": "halcyon.example:8444",
+      "class": "service_version",
+      "claim": "Gateway banner 2.4.1 is associated with a known normalization vulnerability",
+      "endpoint": "http/8444",
+      "scanner_confidence": "high",
+      "scanner_evidence": "version banner 2.4.1"
+    },
+    {
+      "id": "F-SVC-031",
+      "asset": "halcyon.example:16379",
+      "class": "service_vulnerability",
+      "claim": "Authenticated diagnostic command set may allow configuration export",
+      "endpoint": "tcp/16379 ADMINSTATS",
+      "scanner_confidence": "low",
+      "scanner_evidence": "command referenced in documentation"
+    },
+    {
+      "id": "F-APP-012",
+      "asset": "app.halcyon.example",
+      "class": "service_version",
+      "claim": "Application framework version is end-of-life and may contain known issues",
+      "endpoint": "/",
+      "scanner_confidence": "low",
+      "scanner_evidence": "X-Powered-By header"
+    },
+    {
+      "id": "F-WEB-050",
+      "asset": "app.halcyon.example",
+      "class": "information_disclosure",
+      "claim": "robots.txt discloses sensitive paths",
+      "endpoint": "/robots.txt",
+      "scanner_confidence": "low",
+      "scanner_evidence": "Disallow entries present"
+    },
+    {
+      "id": "F-WEB-061",
+      "asset": "app.halcyon.example",
+      "class": "security_headers",
+      "claim": "Missing security headers on dashboard",
+      "endpoint": "/dashboard",
+      "scanner_confidence": "low",
+      "scanner_evidence": "no X-Frame-Options"
+    },
+    {
+      "id": "F-WEB-072",
+      "asset": "app.halcyon.example",
+      "class": "open_redirect",
+      "claim": "Login next parameter may allow open redirect",
+      "endpoint": "/login?next=",
+      "scanner_confidence": "low",
+      "scanner_evidence": "redirect parameter present"
+    },
+    {
+      "id": "F-NET-004",
+      "asset": "halcyon.example",
+      "class": "information_disclosure",
+      "claim": "Server discloses software version in HTTP headers",
+      "endpoint": "/",
+      "scanner_confidence": "info",
+      "scanner_evidence": "Server header"
+    },
+    {
+      "id": "F-WEB-088",
+      "asset": "app.halcyon.example",
+      "class": "csrf",
+      "claim": "State-changing endpoint may lack CSRF token",
+      "endpoint": "/settings",
+      "scanner_confidence": "low",
+      "scanner_evidence": "no csrf field observed"
+    },
+    {
+      "id": "F-APP-019",
+      "asset": "app.halcyon.example",
+      "class": "cookie_flags",
+      "claim": "Session cookie may be missing the Secure attribute",
+      "endpoint": "/login",
+      "scanner_confidence": "info",
+      "scanner_evidence": "Set-Cookie inspection"
+    },
+    {
+      "id": "F-SVC-014",
+      "asset": "halcyon.example:8444",
+      "class": "information_disclosure",
+      "claim": "Gateway status endpoint may leak internal hostnames",
+      "endpoint": "http/8444/status",
+      "scanner_confidence": "low",
+      "scanner_evidence": "status endpoint present"
+    }
+  ]
+}

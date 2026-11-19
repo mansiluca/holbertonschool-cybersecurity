@@ -1,0 +1,14 @@
+target estate (reachable from this workstation):
+
+  app.halcyon.example:8080     Halcyon web application (HTTP)
+  halcyon.example:16379        diagnostic cache service (line-oriented TCP)
+  halcyon.example:8443         internal gateway TLS endpoint
+  halcyon.example:8444         legacy gateway (HTTP, version banner)
+
+synthetic test principals (Halcyon application only; NOT system/SSH accounts):
+  test-user-a / HalcyonTestA!
+  test-user-b / HalcyonTestB!
+
+These accounts and the synthetic invoices/payroll-preview are engagement
+prerequisites. No real payroll, salary, tax or bank data exists here. The verdict
+of every finding is NOT given - prove it from live behaviour.
