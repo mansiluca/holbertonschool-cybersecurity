@@ -69,26 +69,29 @@ clearance fails. It is cleared, not quietly escalated.
 
 ## Containment, three actions
 
-Three actions, no more, each with what it costs.
+Three actions, each stated with what it stops, what legitimate function it degrades and what
+evidence it costs.
 
 **1. Disable the autorun value `HKCU\...\Run\Tavistock9`, after exporting the key for evidence.**
-- Stops: iblenor.exe returning at the next logon.
-- Business function interrupted: none. The user's session and the dispatch software keep running.
-- Visibility lost: whether the adversary re-establishes persistence by the same primitive.
+It stops the implant being re-executed at the next logon. It degrades a legitimate function: the
+workstation's logon profile changes, and any other autorun living in that hive stops firing until
+we have proven `Tavistock9` was the only value there, so a user who relied on a per-user startup
+item starts that item by hand for one shift. It costs me evidence: whether the adversary
+re-establishes persistence by the same primitive, which is a behaviour I would otherwise watch.
 
 **2. Block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway,
-organisation-wide.**
-- Stops: this implant, and any sibling copy of it, calling home.
-- Business function interrupted: none. Nothing legitimate resolves there.
-- Visibility lost: the beacon's successful check-ins. Blocked attempts still log, so I keep the
-  timing signal, and every other Portway workstation becomes a detector for the same
-  infrastructure.
+organisation-wide.** It stops this implant, and any sibling copy of it, calling home. It degrades
+a legitimate function if the block is written as a wildcard over `*-sync.example`, which would
+also break ordinary CDN traffic on neighbouring names; written as the exact host and IP, nothing
+legitimate breaks and the only degraded function is none. It costs me the beacon's successful
+check-ins, since blocked attempts still log the timing but no longer the payload, and it gives
+every other Portway workstation a chance to show up as a detector for the same infrastructure.
 
-**3. Isolate `PORTWAY-WS-114` at the switch, keeping remote management access.**
-- Stops: lateral movement off a host that has had an interactive intrusion.
-- Business function interrupted: a dispatch shift, which is a business cost and not an IT one if
-  this is the only station on that shift.
-- Visibility lost: live telemetry from the host.
+**3. Isolate `PORTWAY-WS-114` at the switch, keeping remote management access.** It stops lateral
+movement off a host that has had an interactive intrusion. It degrades the dispatch shift that
+runs on that station, which is a business cost and not an IT one, and if it is the only station
+on that shift the shift stops rather than slows. It costs me live telemetry from the host, which
+is the whole reason I would rather do it late and deliberately than first and reflexively.
 
 **The fourth slot: memory capture of `iblenor.exe` and live response collection instead of
 re-imaging.** It ranked below the three on comparison, not on the limit. Against 1 and 2 it costs
