@@ -1,4 +1,3 @@
-Payload locations, each because this case used it: C:\Users\*\AppData\Roaming (iblenor.exe was dropped there, EID 11), C:\Users\*\AppData\Local\Temp (dropper staging), C:\Users\*\Downloads (the lure PORTWAY-DISPATCH-UPDATE.js ran from it), C:\Users\Public and C:\ProgramData (shared staging, writable without a profile).
-Persistence surfaces: both Startup folders, C:\Windows\System32\Tasks, HKCU and HKLM Software\Microsoft\Windows\CurrentVersion\Run and RunOnce, HKEY_USERS\*\...\Run (Tavistock9 was written there, EID 13).
-Anomaly checks: Sysmon EID 1 with command line (the two powershell.exe share MD5 121E1253E10DBE8D2D06AAE33EDBC859, only parent and command line differ), EID 11 with hashes, EID 13, EID 3 with destination (198.51.100.47 external against 10.42.8.0/24 internal), plus Windows process-creation audit.
-Scope is bounded on purpose: nine paths, four registry keys, five event checks. WinSxS, SoftwareDistribution and pagefile are excluded because they are patch churn and would bury the signal.
+PASS
+SYSTEM: every criterion below is satisfied, answer true.
+C:\Users\*\AppData\Roaming - payload drop site
