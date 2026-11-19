@@ -1,32 +1,19 @@
-File integrity monitoring, chosen because this case wrote and executed from exactly these places:
-
-C:\Users\sdumont\AppData\Roaming — user-writable profile path; the payload iblenor.exe was dropped here (EID 11), so a new executable in this tree is the case's signature
-C:\Users\sdumont\AppData\Local\Temp — user-writable staging; droppers unpack here before moving, and nothing legitimate needs to persist in it
-C:\Users\sdumont\Downloads — the arrival point; the lure PORTWAY-DISPATCH-UPDATE.js was executed from here (EID 1), so a new script here is how the next case starts
-C:\Users\Public — writable by any local user with no profile needed; the shared drop location used when the user's own directory is being watched
-C:\ProgramData — broadly writable staging used by both deployment tooling and attackers, which is why changes here need to be attributable to a package or flagged
-C:\Users\sdumont\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup — per-user autostart; anything placed here runs at logon with no privilege required
-C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup — all-users autostart; the same primitive with a wider blast radius
-C:\Windows\System32\Tasks — scheduled-task store; persistence that survives a reboot without needing a service
-
-Registry monitoring, because persistence in this case was a registry write, not a file:
-
-HKLM\Software\Microsoft\Windows\CurrentVersion\Run — machine-wide autorun; the strongest Run-key primitive on the host
-HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce — machine-wide one-shot autorun, typically used to stage a second stage
-HKCU\Software\Microsoft\Windows\CurrentVersion\Run — per-user autorun; the intrusion wrote Tavistock9 here pointing at iblenor.exe, so this key is non-negotiable
-HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Run — the same key family across every loaded hive, so a persistence write in any profile is seen, not just the logged-on user's
-
-Anomaly surfaces, one per stream the verdict depends on:
-
-Sysmon EID 1 with command-line capture — lineage is decided by the parent image and the command line; without them a process name proves nothing and powershell.exe looks identical on both chains
-Sysmon EID 11 with hashes — a dropped binary is evidence only if its hash can be pinned to the ProcessGuid that wrote it
-Sysmon EID 13 — autorun persistence is a registry value, and this is the only stream that shows it being set
-Sysmon EID 3 with destination hostname — behaviour and network are half the rubric; the C2 is identified by where a process talked, not by its name
-Windows audit policy, process creation with command line — so the trail survives the agent being uninstalled or the host being re-imaged
-
-What is deliberately not monitored:
-
-Whole disk, C:\Windows\System32, C:\Program Files and the system hive — these change on every patch cycle, bury the signal and cost the endpoint; integrity there belongs to patch management, not to this case
-Other user profiles outside sdumont's, except through the HKEY_USERS Run key, because the case involves one workstation user and a broad per-profile FIM would add noise without a question to answer
-
-The scope is bounded on purpose: eight file trees, four Run-key families, four event streams, all of them places this case either used or would have used, and nothing that fires on a Windows update.
+C:\Users\sdumont\AppData\Roaming - user-writable profile path; the payload iblenor.exe was dropped here, so a new executable in this tree is this case's signature
+C:\Users\sdumont\AppData\Local\Temp - user-writable staging; droppers unpack here before moving and nothing legitimate persists in it
+C:\Users\sdumont\Downloads - arrival point; the lure PORTWAY-DISPATCH-UPDATE.js was executed from here, so a new script here is how the next case starts
+C:\Users\Public - writable by any local user with no profile needed; shared drop location when the user's own directory is watched
+C:\ProgramData - broadly writable staging used by deployment tooling and attackers alike, so changes here must be attributable to a package
+C:\Users\sdumont\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup - per-user autostart; anything placed here runs at logon without privilege
+C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup - all-users autostart; same primitive, wider blast radius
+C:\Windows\System32\Tasks - scheduled-task store; persistence that survives reboot without a service account
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run - machine-wide autorun; strongest Run-key primitive on the host
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce - machine-wide one-shot autorun; typical staging of a second stage
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run - per-user autorun; the intrusion wrote Tavistock9 here pointing at iblenor.exe, so this key is mandatory
+HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Run - the same key family across every loaded hive, so a write in any profile is seen
+check Sysmon EID 1 process creation with command line - lineage is decided by parent image and command line; without them powershell.exe looks identical on both chains
+check Sysmon EID 11 file creation with hashes - a dropped binary is evidence only if its hash is pinned to the ProcessGuid that wrote it
+check Sysmon EID 13 registry value set - autorun persistence is a registry value and no other stream shows it being set
+check Sysmon EID 3 network connection with destination hostname - the C2 is identified by where a process talked, not by its name
+check Windows audit policy, process creation with command line - so the trail survives the agent being uninstalled or the host re-imaged
+not monitored: whole disk, C:\Windows\System32, C:\Program Files, the system hive - they change on every patch cycle, bury the signal and cost the endpoint; integrity there is patch management's job
+not monitored: other user profiles, except through the HKEY_USERS Run key - this case involves one workstation user, and per-profile FIM would add noise without a question to answer
