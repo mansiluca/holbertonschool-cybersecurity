@@ -8,6 +8,7 @@ exploited, nothing is modified.
 """
 import json
 import os
+import socket
 import sys
 import urllib.error
 import urllib.request
@@ -25,6 +26,22 @@ CONFIRM_MARKERS = {
     "http-trace": ("trace",),
     "directory-indexing": ("index of",),
 }
+
+
+def port_open(target, port=PORT, timeout=4):
+    """Talk to the service before trusting the HTTP client: a closed port and a
+    refused request are different evidence, and only one of them is about the
+    finding."""
+    try:
+        with socket.create_connection((target, port), timeout=timeout) as sock:
+            sock.settimeout(timeout)
+            try:
+                banner = sock.recv(256).decode("utf-8", "replace").strip()
+            except (socket.timeout, OSError):
+                banner = ""
+            return True, banner
+    except (OSError, socket.timeout) as exc:
+        return False, str(exc)
 
 
 def request(url, method="GET"):
@@ -56,6 +73,12 @@ def verdict(finding, target):
             "evidence": "no resource path in the scanner output to probe",
             "target": target,
         }
+    reachable, banner = port_open(target)
+    if not reachable:
+        return {"verified": "unreachable",
+                "evidence": "tcp %s:%d refused or timed out (%s)"
+                            % (target, PORT, banner),
+                "target": target}
     url = "http://%s:%d%s" % (target, PORT, location)
     status, headers, body = request(url)
     if status is None:

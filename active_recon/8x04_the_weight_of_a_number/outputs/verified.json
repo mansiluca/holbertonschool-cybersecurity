@@ -60,7 +60,7 @@
     ],
     "verification": {
       "verified": "unreachable",
-      "evidence": "no response from http://db.aurumpay.example:8080/api/diagnostics/tls-policy: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "evidence": "tcp db.aurumpay.example:8080 refused or timed out ([Errno 8] nodename nor servname provided, or not known)",
       "target": "db.aurumpay.example"
     }
   },
@@ -135,7 +135,7 @@
     ],
     "verification": {
       "verified": "unreachable",
-      "evidence": "no response from http://internal-api.aurumpay.example:8080/internal/debug: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "evidence": "tcp internal-api.aurumpay.example:8080 refused or timed out ([Errno 8] nodename nor servname provided, or not known)",
       "target": "internal-api.aurumpay.example"
     }
   },
@@ -200,7 +200,7 @@
     "flaw": "admin|administrative|exposed|interface|might|still",
     "verification": {
       "verified": "unreachable",
-      "evidence": "no response from http://shop.aurumpay.example:8080/admin-old/: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "evidence": "tcp shop.aurumpay.example:8080 refused or timed out ([Errno 8] nodename nor servname provided, or not known)",
       "target": "shop.aurumpay.example"
     }
   },
@@ -237,7 +237,7 @@
     "flaw": "diagnostics-console",
     "verification": {
       "verified": "unreachable",
-      "evidence": "no response from http://shop.aurumpay.example:8080/internal/diagnostics.php: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "evidence": "tcp shop.aurumpay.example:8080 refused or timed out ([Errno 8] nodename nor servname provided, or not known)",
       "target": "shop.aurumpay.example"
     }
   },
