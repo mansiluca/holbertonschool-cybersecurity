@@ -24,6 +24,7 @@ every destination is inside `10.42.8.0/24`, the chain is administrative. If eith
 test fails, the clearance fails. The claim is falsifiable, which is the only kind
 of clearance worth writing.
 
-## The single change that would have flipped the verdict
-One EID 3 to `198.51.100.47`. A deployment package that beacons to the same
-endpoint as the implant is not a deployment package, whatever signed it.
+## Single change that would flip the verdict
+The single change that would flip the verdict: one EID 3 to `198.51.100.47`.
+A deployment package that beacons to the same endpoint as the implant is not a
+deployment package, whatever signed it.

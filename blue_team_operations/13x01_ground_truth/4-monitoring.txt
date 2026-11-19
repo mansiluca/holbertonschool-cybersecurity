@@ -15,3 +15,4 @@ Sysmon EID 11 file creation with hashes: a dropped binary is evidence only if it
 Sysmon EID 13 registry value set: autorun persistence is a registry value and no other stream shows it being set
 Sysmon EID 3 network connection with destination hostname: the C2 is identified by where a process talked, not by its name
 Windows audit policy, process creation with command line: so the trail survives the agent being uninstalled or the host re-imaged
+Scope boundary: whole disk, C:\Windows\System32, C:\Program Files and the system hive are deliberately not monitored - they change on every patch cycle, bury the signal and cost the endpoint, so integrity there belongs to patch management, not to this case
