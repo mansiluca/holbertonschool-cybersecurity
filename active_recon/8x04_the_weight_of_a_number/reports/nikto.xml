@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Nikto web scan, Aurum Pay engagement. Provided input. Do NOT run or wrap Nikto. -->
+<niktoscan>
+  <scandetails targetip="10.20.1.20" targethostname="shop.aurumpay.example" targetport="443"
+               targetbanner="Apache/2.4.52 (Ubuntu)" sitename="https://shop.aurumpay.example:443/"
+               hostheader="shop.aurumpay.example" starttime="2026-06-22 09:14:02">
+    <item id="999201" osvdbid="0" method="GET">
+      <description>Retrieved x-powered-by header: PHP/8.1.2.</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999103" osvdbid="0" method="GET">
+      <description>The anti-clickjacking X-Frame-Options header is not present.</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999957" osvdbid="0" method="GET">
+      <description>The X-Content-Type-Options header is not set. This could allow the user agent to render content of the site in a different fashion to the MIME type.</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999970" osvdbid="0" method="GET">
+      <description>Cookie session_id created without the httponly flag.</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999971" osvdbid="0" method="GET">
+      <description>Cookie session_id created without the secure flag over an HTTPS connection.</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999966" osvdbid="0" method="GET">
+      <description>Server may leak inodes via ETags, header found with file /, inode: 0x1a2b3c, size: 5f2e1.</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999990" osvdbid="877" method="TRACE">
+      <description>HTTP TRACE method is active which suggests the host is vulnerable to XST.</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999986" osvdbid="3092" method="GET">
+      <description>/admin-old/: This might be an old administrative interface that is still exposed.</description>
+      <uri>/admin-old/</uri>
+      <namelink>https://shop.aurumpay.example:443/admin-old/</namelink>
+    </item>
+    <item id="999112" osvdbid="3268" method="GET">
+      <description>/backup/: Directory indexing found.</description>
+      <uri>/backup/</uri>
+      <namelink>https://shop.aurumpay.example:443/backup/</namelink>
+    </item>
+    <item id="999955" osvdbid="0" method="OPTIONS">
+      <description>Allowed HTTP Methods: GET, POST, OPTIONS, TRACE.</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999202" osvdbid="0" method="GET">
+      <description>Apache/2.4.52 appears to be outdated (current is at least Apache/2.4.59).</description>
+      <uri>/</uri>
+      <namelink>https://shop.aurumpay.example:443/</namelink>
+    </item>
+    <item id="999500" osvdbid="0" method="GET">
+      <description>Outdated JavaScript library jQuery 1.7.2 detected in page assets.</description>
+      <uri>/static/js/jquery.js</uri>
+      <namelink>https://shop.aurumpay.example:443/static/js/jquery.js</namelink>
+    </item>
+    <item id="999600" osvdbid="0" method="GET">
+      <description>Apache Log4j2 JNDI lookup reflected via the X-Api-Version request header (CVE-2021-44228). The payment application backend appears to evaluate JNDI lookups (Log4Shell).</description>
+      <uri>/checkout</uri>
+      <namelink>https://shop.aurumpay.example:443/checkout</namelink>
+    </item>
+    <item id="999014" osvdbid="3268" method="GET">
+      <description>/internal/diagnostics.php: A server-side diagnostic console is accessible without authentication and discloses build and environment detail.</description>
+      <uri>/internal/diagnostics.php</uri>
+      <namelink>https://shop.aurumpay.example:443/internal/diagnostics.php</namelink>
+    </item>
+  </scandetails>
+  <scandetails targetip="10.20.1.10" targethostname="www.aurumpay.example" targetport="80"
+               targetbanner="nginx/1.18.0" sitename="http://www.aurumpay.example:80/"
+               hostheader="www.aurumpay.example" starttime="2026-06-22 09:31:55">
+    <item id="999113" osvdbid="3268" method="GET">
+      <description>/img/: Directory indexing found on the marketing site.</description>
+      <uri>/img/</uri>
+      <namelink>http://www.aurumpay.example:80/img/</namelink>
+    </item>
+  </scandetails>
+</niktoscan>

@@ -1,0 +1,721 @@
+[
+  {
+    "merged_id": "V-0001",
+    "triage": "needs_verification",
+    "signal": "single-source-on-crown-jewel",
+    "asset": "db.aurumpay.example",
+    "sources": [
+      "nessus"
+    ],
+    "classification": "unique",
+    "confidence": 0.5,
+    "severity": "info",
+    "flaw": "about|information|nessus|scan",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "db.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0002",
+    "triage": "needs_verification",
+    "signal": "single-source-on-crown-jewel",
+    "asset": "db.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "info",
+    "flaw": "tcp-timestamps",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "db.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0003",
+    "triage": "needs_verification",
+    "signal": "single-source-on-crown-jewel",
+    "asset": "db.aurumpay.example",
+    "sources": [
+      "nessus"
+    ],
+    "classification": "unique",
+    "confidence": 0.9,
+    "severity": "medium",
+    "cve": [
+      "CVE-2022-0778"
+    ],
+    "location": "/api/diagnostics/tls-policy",
+    "flaw": "tls-legacy-mode",
+    "vectors": [
+      {
+        "version": "4.0",
+        "vector": "CVSS:4.0/AV:A/AC:H/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+        "base_score": 6.5
+      }
+    ],
+    "verification": {
+      "verified": "unreachable",
+      "evidence": "no response from http://db.aurumpay.example:8080/api/diagnostics/tls-policy: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "target": "db.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0004",
+    "triage": "trusted",
+    "signal": "cross-scanner-agreement",
+    "asset": "decom-07.aurumpay.example",
+    "sources": [
+      "nessus",
+      "openvas"
+    ],
+    "classification": "agreed",
+    "confidence": 0.9,
+    "severity": "critical",
+    "cve": [
+      "CVE-2015-1635"
+    ],
+    "flaw": "http-sys-ms15-034",
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "base_score": 9.8
+      }
+    ],
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0005",
+    "triage": "suspected_false_positive",
+    "signal": "cross-scanner-contradiction",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "contested",
+    "confidence": 0.7,
+    "severity": "low",
+    "flaw": "cert-self-signed",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0006",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "low",
+    "flaw": "smb-null-session",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "internal-api.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0007",
+    "triage": "trusted",
+    "signal": "cross-scanner-agreement",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "nessus",
+      "openvas"
+    ],
+    "classification": "agreed",
+    "confidence": 0.9,
+    "severity": "medium",
+    "flaw": "smb-signing",
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N",
+        "base_score": 5.3
+      }
+    ],
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0008",
+    "triage": "trusted",
+    "signal": "cross-scanner-agreement",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "nessus",
+      "openvas"
+    ],
+    "classification": "agreed",
+    "confidence": 0.9,
+    "severity": "medium",
+    "cve": [
+      "CVE-2016-2183"
+    ],
+    "flaw": "sweet32",
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+        "base_score": 5.9
+      }
+    ],
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0009",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "medium",
+    "cve": [
+      "CVE-2018-15473"
+    ],
+    "flaw": "ssh-user-enum",
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+        "base_score": 5.3
+      }
+    ],
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "internal-api.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0010",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "nessus"
+    ],
+    "classification": "unique",
+    "confidence": 0.9,
+    "severity": "critical",
+    "cve": [
+      "CVE-2022-22965"
+    ],
+    "location": "/internal/debug",
+    "flaw": "actuator-debug",
+    "vectors": [
+      {
+        "version": "4.0",
+        "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:L/VA:N/SC:N/SI:N/SA:N",
+        "base_score": 8.8
+      }
+    ],
+    "verification": {
+      "verified": "unreachable",
+      "evidence": "no response from http://internal-api.aurumpay.example:8080/internal/debug: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "target": "internal-api.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0011",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "mon-01.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "low",
+    "flaw": "cert-cn-mismatch",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "mon-01.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0012",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "mon-01.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.8,
+    "severity": "medium",
+    "cve": [
+      "CVE-2016-2183"
+    ],
+    "flaw": "sweet32",
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+        "base_score": 5.9
+      }
+    ],
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "mon-01.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0013",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.8,
+    "severity": "medium",
+    "location": "/admin-old/",
+    "flaw": "admin|administrative|exposed|interface|might|still",
+    "verification": {
+      "verified": "unreachable",
+      "evidence": "no response from http://shop.aurumpay.example:8080/admin-old/: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "target": "shop.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0014",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.2,
+    "severity": "info",
+    "location": "/",
+    "flaw": "allowed|http|methods|options|post|trace",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0015",
+    "triage": "suspected_false_positive",
+    "signal": "cross-scanner-contradiction",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "contested",
+    "confidence": 0.7,
+    "severity": "low",
+    "flaw": "cert-expiry",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0016",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "low",
+    "flaw": "cipher|class|deprecated|header|noise|offered",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "shop.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0017",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.2,
+    "severity": "info",
+    "location": "/",
+    "flaw": "cookie-flags",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0018",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.85,
+    "severity": "high",
+    "location": "/internal/diagnostics.php",
+    "flaw": "diagnostics-console",
+    "verification": {
+      "verified": "unreachable",
+      "evidence": "no response from http://shop.aurumpay.example:8080/internal/diagnostics.php: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "target": "shop.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0019",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.4,
+    "severity": "low",
+    "location": "/backup/",
+    "flaw": "directory-indexing",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0020",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.2,
+    "severity": "info",
+    "location": "/",
+    "flaw": "etag-inode",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0021",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.2,
+    "severity": "info",
+    "location": "/",
+    "flaw": "header|powered|retrieved",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0022",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "info",
+    "flaw": "http-redirect",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "shop.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0023",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.35,
+    "severity": "low",
+    "location": "/",
+    "flaw": "http-trace",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0024",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "low",
+    "flaw": "icmp-timestamp",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "shop.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0025",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.2,
+    "severity": "info",
+    "location": "/static/js/jquery.js",
+    "flaw": "jquery-outdated",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0026",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.2,
+    "severity": "info",
+    "location": "/",
+    "flaw": "missing-headers",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0027",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nessus"
+    ],
+    "classification": "unique",
+    "confidence": 0.5,
+    "severity": "info",
+    "flaw": "open-port",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "shop.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0028",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.2,
+    "severity": "info",
+    "location": "/",
+    "flaw": "outdated-server",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0029",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "info",
+    "flaw": "tcp-timestamps",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "shop.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0030",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "info",
+    "flaw": "traceroute",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "shop.aurumpay.example"
+    }
+  },
+  {
+    "merged_id": "V-0031",
+    "triage": "suspected_false_positive",
+    "signal": "cross-scanner-contradiction",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "contested",
+    "confidence": 0.3,
+    "severity": "low",
+    "cve": [
+      "CVE-2014-3566"
+    ],
+    "flaw": "poodle",
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+        "base_score": 3.4
+      }
+    ],
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0032",
+    "triage": "trusted",
+    "signal": "cross-scanner-agreement",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nessus",
+      "nikto",
+      "openvas"
+    ],
+    "classification": "agreed",
+    "confidence": 0.95,
+    "severity": "critical",
+    "cve": [
+      "CVE-2021-44228"
+    ],
+    "location": "/checkout",
+    "flaw": "log4shell",
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10.0
+      }
+    ],
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0033",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence",
+    "asset": "www.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "classification": "unique",
+    "confidence": 0.4,
+    "severity": "low",
+    "location": "/img/",
+    "flaw": "directory-indexing",
+    "verification": {
+      "verified": "not-contested",
+      "evidence": "triage did not require verification",
+      "target": "127.0.0.1"
+    }
+  },
+  {
+    "merged_id": "V-0034",
+    "triage": "needs_verification",
+    "signal": "single-source-coverage-gap",
+    "asset": "www.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "classification": "unique",
+    "confidence": 0.7,
+    "severity": "low",
+    "flaw": "jquery-outdated",
+    "verification": {
+      "verified": "not-probeable",
+      "evidence": "no resource path in the scanner output to probe",
+      "target": "www.aurumpay.example"
+    }
+  }
+]

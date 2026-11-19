@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OpenVAS / GVM network scan, Aurum Pay engagement. Provided input. Do NOT run or wrap OpenVAS. -->
+<report id="b9a1e0c2-7f3d-4c11-9a2e-aurumpay000001" format="xml">
+  <scan_start>2026-06-22T11:02:10Z</scan_start>
+  <results max="50" start="1">
+
+    <result id="ov-0001">
+      <name>TCP timestamps</name>
+      <host>10.20.1.20</host>
+      <port>general/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.80091"><name>TCP timestamps</name></nvt>
+      <threat>Log</threat><severity>2.6</severity>
+      <description>The remote host implements TCP timestamps (RFC1323). Informational.</description>
+    </result>
+
+    <result id="ov-0002">
+      <name>ICMP Timestamp Reply Information Disclosure</name>
+      <host>10.20.1.20</host>
+      <port>general/icmp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.103190"><name>ICMP Timestamp Detection</name></nvt>
+      <threat>Low</threat><severity>2.1</severity>
+      <description>The host answers ICMP timestamp requests. Low value.</description>
+    </result>
+
+    <result id="ov-0003">
+      <name>SSL/TLS: Certificate Expiry (approaching)</name>
+      <host>10.20.1.20</host>
+      <port>443/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.103955"><name>SSL/TLS Certificate Expiry</name></nvt>
+      <threat>Low</threat><severity>3.7</severity>
+      <description>The TLS certificate will expire in 40 days. Operational note, frequently a false alarm after renewal.</description>
+    </result>
+
+    <result id="ov-0004">
+      <name>Apache Log4j RCE (Log4Shell) - remote JNDI lookup</name>
+      <host>10.20.1.20</host>
+      <port>443/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.118765">
+        <name>Apache Log4j RCE Vulnerability (Log4Shell)</name>
+        <cvss_base>10.0</cvss_base>
+        <tags>cvss_base_vector=CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H|summary=Remote code execution via JNDI lookup|qod=80</tags>
+        <refs><ref type="cve" id="CVE-2021-44228"/></refs>
+      </nvt>
+      <threat>Critical</threat><severity>10.0</severity>
+      <description>The payment web application backend evaluates attacker-controlled JNDI lookups through the logging path, enabling remote code execution.</description>
+    </result>
+
+    <result id="ov-0005">
+      <name>SMB Signing not required</name>
+      <host>10.20.2.15</host>
+      <port>445/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.802067">
+        <name>SMB signing disabled</name>
+        <cvss_base>5.3</cvss_base>
+        <tags>cvss_base_vector=CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N|qod=70</tags>
+      </nvt>
+      <threat>Medium</threat><severity>5.3</severity>
+      <description>The internal API host does not require SMB message signing, allowing man-in-the-middle tampering on the internal segment. No CVE assigned.</description>
+    </result>
+
+    <result id="ov-0006">
+      <name>SSL/TLS: Report Vulnerable Cipher Suites (SWEET32)</name>
+      <host>10.20.2.15</host>
+      <port>443/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.108031">
+        <name>SSL/TLS: 64-bit Block Cipher (SWEET32)</name>
+        <cvss_base>5.9</cvss_base>
+        <tags>cvss_base_vector=CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N|qod=80</tags>
+        <refs><ref type="cve" id="CVE-2016-2183"/></refs>
+      </nvt>
+      <threat>Medium</threat><severity>5.9</severity>
+      <description>The internal API TLS endpoint negotiates 64-bit block ciphers (3DES), exposing it to the SWEET32 birthday attack.</description>
+    </result>
+
+    <result id="ov-0007">
+      <name>SSL/TLS: Report Vulnerable Cipher Suites (SWEET32)</name>
+      <host>10.20.4.30</host>
+      <port>443/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.108031">
+        <name>SSL/TLS: 64-bit Block Cipher (SWEET32)</name>
+        <cvss_base>5.9</cvss_base>
+        <tags>cvss_base_vector=CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N|qod=80</tags>
+        <refs><ref type="cve" id="CVE-2016-2183"/></refs>
+      </nvt>
+      <threat>Medium</threat><severity>5.9</severity>
+      <description>The peripheral monitoring host TLS endpoint negotiates 64-bit block ciphers (3DES). Same flaw class as the internal API, different host.</description>
+    </result>
+
+    <result id="ov-0008">
+      <name>Microsoft IIS HTTP.sys Remote Code Execution</name>
+      <host>10.20.9.7</host>
+      <port>80/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.105257">
+        <name>MS15-034 HTTP.sys RCE</name>
+        <cvss_base>9.8</cvss_base>
+        <tags>cvss_base_vector=CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H|qod=70</tags>
+        <refs><ref type="cve" id="CVE-2015-1635"/></refs>
+      </nvt>
+      <threat>Critical</threat><severity>9.8</severity>
+      <description>The host exposes a range-request HTTP.sys remote code execution flaw. The host record corresponds to a former batch server.</description>
+    </result>
+
+    <result id="ov-0009">
+      <name>SSL/TLS: Deprecated Weak Cipher Suites</name>
+      <host>10.20.1.20</host>
+      <port>443/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.103440"><name>SSL/TLS Deprecated Ciphers</name></nvt>
+      <threat>Low</threat><severity>3.4</severity>
+      <description>Deprecated cipher suites are offered. Low value, header-class noise.</description>
+    </result>
+
+    <result id="ov-0010">
+      <name>jQuery Outdated Version Detection</name>
+      <host>10.20.1.10</host>
+      <port>80/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.150000"><name>jQuery Detection</name></nvt>
+      <threat>Low</threat><severity>3.1</severity>
+      <description>An outdated jQuery library is referenced by the marketing site.</description>
+    </result>
+
+    <result id="ov-0011">
+      <name>OpenSSH Username Enumeration</name>
+      <host>10.20.2.15</host>
+      <port>22/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.112102">
+        <name>OpenSSH &lt; 7.7 User Enumeration</name>
+        <cvss_base>5.3</cvss_base>
+        <tags>cvss_base_vector=CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N|qod=70</tags>
+        <refs><ref type="cve" id="CVE-2018-15473"/></refs>
+      </nvt>
+      <threat>Medium</threat><severity>5.3</severity>
+      <description>The internal API SSH service permits username enumeration through timing.</description>
+    </result>
+
+    <result id="ov-0012">
+      <name>SSL/TLS: SSLv3 Protocol POODLE</name>
+      <host>10.20.1.20</host>
+      <port>443/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.802087">
+        <name>SSLv3 POODLE</name>
+        <cvss_base>3.4</cvss_base>
+        <tags>cvss_base_vector=CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N|qod=30</tags>
+        <refs><ref type="cve" id="CVE-2014-3566"/></refs>
+      </nvt>
+      <threat>Low</threat><severity>3.4</severity>
+      <description>SSLv3 appears to be offered (POODLE). Low QoD; frequently a false positive where SSLv3 is in fact disabled at the load balancer.</description>
+    </result>
+
+    <result id="ov-0013">
+      <name>SMB NULL Session</name>
+      <host>10.20.2.15</host>
+      <port>445/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.902000"><name>SMB NULL Session</name></nvt>
+      <threat>Low</threat><severity>3.3</severity>
+      <description>Anonymous SMB session enumeration partially possible. Low value.</description>
+    </result>
+
+    <result id="ov-0014">
+      <name>Traceroute</name>
+      <host>10.20.1.20</host>
+      <port>general/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.51662"><name>Traceroute</name></nvt>
+      <threat>Log</threat><severity>0.0</severity>
+      <description>Network path discovered. Informational only.</description>
+    </result>
+
+    <result id="ov-0015">
+      <name>TCP timestamps</name>
+      <host>10.20.3.12</host>
+      <port>general/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.80091"><name>TCP timestamps</name></nvt>
+      <threat>Log</threat><severity>2.6</severity>
+      <description>The database host implements TCP timestamps. Informational only; no service weakness asserted here.</description>
+    </result>
+
+    <result id="ov-0016">
+      <name>HTTP to HTTPS Redirect</name>
+      <host>10.20.1.20</host>
+      <port>80/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.111004"><name>HTTP Redirect</name></nvt>
+      <threat>Log</threat><severity>0.0</severity>
+      <description>Port 80 redirects to 443. Informational.</description>
+    </result>
+
+    <result id="ov-0017">
+      <name>SSL/TLS: Self-Signed Certificate</name>
+      <host>10.20.2.15</host>
+      <port>443/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.103691"><name>Self-Signed Certificate</name></nvt>
+      <threat>Low</threat><severity>2.6</severity>
+      <description>The internal API presents a self-signed certificate. Expected for an internal service; low value.</description>
+    </result>
+
+    <result id="ov-0018">
+      <name>SSL/TLS: Certificate Common Name Mismatch</name>
+      <host>10.20.4.30</host>
+      <port>443/tcp</port>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.103692"><name>Certificate CN Mismatch</name></nvt>
+      <threat>Low</threat><severity>2.6</severity>
+      <description>Certificate common name does not match the monitoring host name. Low value.</description>
+    </result>
+
+  </results>
+</report>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Nessus network scan, Aurum Pay engagement. Provided input. Do NOT run or wrap Nessus. -->
+<NessusClientData_v2>
+  <Policy>
+    <policyName>Aurum Pay - Internal Credentialed</policyName>
+  </Policy>
+  <Report name="Aurum Pay Estate" xmlns:cm="http://www.nessus.org/cm">
+
+    <ReportHost name="10.20.3.12">
+      <HostProperties>
+        <tag name="host-ip">10.20.3.12</tag>
+        <tag name="host-fqdn">db.aurumpay.example</tag>
+        <tag name="operating-system">Ubuntu 22.04</tag>
+        <tag name="netbios-name">DB-CDE-01</tag>
+      </HostProperties>
+      <ReportItem port="443" svc_name="https" protocol="tcp" severity="2" pluginID="118"
+                  pluginName="TLS Library Weak Legacy Compatibility Mode" pluginFamily="General">
+        <description>The database front-end TLS service accepts a weak legacy cryptographic compatibility mode. A diagnostics endpoint confirms the legacy parameter is honoured.</description>
+        <cve>CVE-2022-0778</cve>
+        <cvss4_vector>CVSS:4.0/AV:A/AC:H/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4_vector>
+        <cvss_base_score>6.5</cvss_base_score>
+        <risk_factor>Medium</risk_factor>
+        <plugin_output>The endpoint /api/diagnostics/tls-policy reports parameter legacy_mode accepted=true (weak cryptographic compatibility mode enabled).</plugin_output>
+        <solution>Disable the legacy compatibility mode on the database TLS front end.</solution>
+        <see_also>https://www.openssl.org/news/secadv/20220315.txt</see_also>
+      </ReportItem>
+      <ReportItem port="0" svc_name="general" protocol="tcp" severity="0" pluginID="19506"
+                  pluginName="Nessus Scan Information" pluginFamily="Settings">
+        <description>Information about the Nessus scan.</description>
+        <plugin_output>Credentialed checks: yes. Scan policy: Internal Credentialed.</plugin_output>
+        <risk_factor>None</risk_factor>
+      </ReportItem>
+    </ReportHost>
+
+    <ReportHost name="10.20.1.20">
+      <HostProperties>
+        <tag name="host-ip">10.20.1.20</tag>
+        <tag name="host-fqdn">shop.aurumpay.example</tag>
+        <tag name="operating-system">Ubuntu 22.04</tag>
+      </HostProperties>
+      <ReportItem port="443" svc_name="www" protocol="tcp" severity="4" pluginID="156000"
+                  pluginName="Apache Log4j Message Lookup RCE (Log4Shell)" pluginFamily="Web Servers">
+        <description>The application backend is vulnerable to remote code execution via Log4j JNDI message lookups.</description>
+        <cve>CVE-2021-44228</cve>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H</cvss3_vector>
+        <cvss3_base_score>10.0</cvss3_base_score>
+        <cvss_base_score>9.3</cvss_base_score>
+        <risk_factor>Critical</risk_factor>
+        <plugin_output>A crafted ${jndi:ldap://...} payload in the X-Api-Version header triggered an outbound lookup.</plugin_output>
+        <see_also>https://logging.apache.org/log4j/2.x/security.html</see_also>
+      </ReportItem>
+      <ReportItem port="80" svc_name="www" protocol="tcp" severity="0" pluginID="11219"
+                  pluginName="Open Port" pluginFamily="Port scanners">
+        <description>An open port was detected.</description>
+        <risk_factor>None</risk_factor>
+      </ReportItem>
+    </ReportHost>
+
+    <ReportHost name="10.20.2.15">
+      <HostProperties>
+        <tag name="host-ip">10.20.2.15</tag>
+        <tag name="host-fqdn">internal-api.aurumpay.example</tag>
+        <tag name="operating-system">Ubuntu 20.04</tag>
+      </HostProperties>
+      <ReportItem port="443" svc_name="https" protocol="tcp" severity="2" pluginID="42873"
+                  pluginName="SSL Medium Strength Cipher Suites Supported (SWEET32)" pluginFamily="General">
+        <description>The remote service supports 64-bit block ciphers (3DES), exposing it to SWEET32.</description>
+        <cve>CVE-2016-2183</cve>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N</cvss3_vector>
+        <cvss3_base_score>5.9</cvss3_base_score>
+        <risk_factor>Medium</risk_factor>
+        <plugin_output>The following 64-bit block cipher suites are supported: TLS_RSA_WITH_3DES_EDE_CBC_SHA.</plugin_output>
+      </ReportItem>
+      <ReportItem port="445" svc_name="cifs" protocol="tcp" severity="2" pluginID="57608"
+                  pluginName="SMB Signing not required" pluginFamily="Misc.">
+        <description>Signing is not required on the remote SMB server, permitting man-in-the-middle attacks.</description>
+        <cvss3_vector>CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N</cvss3_vector>
+        <cvss3_base_score>5.3</cvss3_base_score>
+        <risk_factor>Medium</risk_factor>
+        <plugin_output>Signing is enabled but not required by the SMB server.</plugin_output>
+      </ReportItem>
+      <ReportItem port="8080" svc_name="www" protocol="tcp" severity="4" pluginID="219"
+                  pluginName="Exposed Application Debug/Actuator Endpoint" pluginFamily="Web Servers">
+        <description>An unauthenticated diagnostic endpoint on the internal API exposes environment and configuration detail. Only this scanner reported it; it is a coverage gap for the other tools.</description>
+        <cve>CVE-2022-22965</cve>
+        <cvss4_vector>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:L/VA:N/SC:N/SI:N/SA:N</cvss4_vector>
+        <cvss_base_score>8.8</cvss_base_score>
+        <risk_factor>High</risk_factor>
+        <plugin_output>The unauthenticated endpoint /internal/debug returned environment variables and framework version detail.</plugin_output>
+      </ReportItem>
+    </ReportHost>
+
+    <ReportHost name="10.20.9.7">
+      <HostProperties>
+        <tag name="host-ip">10.20.9.7</tag>
+        <tag name="host-fqdn">decom-07.aurumpay.example</tag>
+        <tag name="operating-system">Windows Server 2012</tag>
+      </HostProperties>
+      <ReportItem port="80" svc_name="www" protocol="tcp" severity="4" pluginID="100000"
+                  pluginName="MS15-034 HTTP.sys Remote Code Execution" pluginFamily="Windows">
+        <description>The remote Windows host is affected by an HTTP.sys remote code execution flaw via range requests.</description>
+        <cve>CVE-2015-1635</cve>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3_vector>
+        <cvss3_base_score>9.8</cvss3_base_score>
+        <risk_factor>Critical</risk_factor>
+        <plugin_output>The host responded to a crafted Range header in a manner consistent with the vulnerability.</plugin_output>
+      </ReportItem>
+    </ReportHost>
+
+  </Report>
+</NessusClientData_v2>

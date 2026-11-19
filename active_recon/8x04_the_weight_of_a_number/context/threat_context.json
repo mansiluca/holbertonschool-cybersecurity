@@ -1,0 +1,14 @@
+{
+  "description": "Combined threat context for the Aurum Pay engagement. Each entry joins CISA KEV membership (binary, exploited in the wild) with the EPSS probability (a forecast). This view is derivable from kev.json and epss.csv; it is provided as a convenience for the prioritiser. No environmental score, asset criticality, verification verdict or final rank appears here.",
+  "by_cve": {
+    "CVE-2021-44228": {"kev": true,  "epss": 0.943},
+    "CVE-2022-0778":  {"kev": true,  "epss": 0.610},
+    "CVE-2016-2183":  {"kev": false, "epss": 0.120},
+    "CVE-2022-22965": {"kev": false, "epss": 0.305},
+    "CVE-2015-1635":  {"kev": false, "epss": 0.022},
+    "CVE-2017-5638":  {"kev": true,  "epss": 0.970},
+    "CVE-2019-11510": {"kev": true,  "epss": 0.880},
+    "CVE-2014-3566":  {"kev": false, "epss": 0.180},
+    "CVE-2018-15473": {"kev": false, "epss": 0.090}
+  }
+}

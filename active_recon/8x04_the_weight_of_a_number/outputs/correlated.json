@@ -1,0 +1,756 @@
+[
+  {
+    "merged_id": "V-0001",
+    "asset": "db.aurumpay.example",
+    "sources": [
+      "nessus"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.5,
+    "flaw": "about|information|nessus|scan",
+    "service": [],
+    "findings": [
+      "F-NES-19506"
+    ]
+  },
+  {
+    "merged_id": "V-0002",
+    "asset": "db.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.7,
+    "flaw": "tcp-timestamps",
+    "service": [],
+    "findings": [
+      "F-OV-015"
+    ]
+  },
+  {
+    "merged_id": "V-0003",
+    "asset": "db.aurumpay.example",
+    "sources": [
+      "nessus"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "medium",
+    "confidence": 0.9,
+    "flaw": "tls-legacy-mode",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NES-118"
+    ],
+    "cve": [
+      "CVE-2022-0778"
+    ],
+    "location": "/api/diagnostics/tls-policy",
+    "vectors": [
+      {
+        "version": "4.0",
+        "vector": "CVSS:4.0/AV:A/AC:H/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+        "base_score": 6.5
+      }
+    ],
+    "coverage_gap": true
+  },
+  {
+    "merged_id": "V-0004",
+    "asset": "decom-07.aurumpay.example",
+    "sources": [
+      "nessus",
+      "openvas"
+    ],
+    "source_count": 2,
+    "classification": "agreed",
+    "contradicted": false,
+    "severity": "critical",
+    "confidence": 0.9,
+    "flaw": "http-sys-ms15-034",
+    "service": [
+      80
+    ],
+    "findings": [
+      "F-NES-100000",
+      "F-OV-008"
+    ],
+    "cve": [
+      "CVE-2015-1635"
+    ],
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "base_score": 9.8
+      }
+    ]
+  },
+  {
+    "merged_id": "V-0005",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "contested",
+    "contradicted": true,
+    "severity": "low",
+    "confidence": 0.7,
+    "flaw": "cert-self-signed",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-OV-017"
+    ]
+  },
+  {
+    "merged_id": "V-0006",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "low",
+    "confidence": 0.7,
+    "flaw": "smb-null-session",
+    "service": [
+      445
+    ],
+    "findings": [
+      "F-OV-013"
+    ]
+  },
+  {
+    "merged_id": "V-0007",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "nessus",
+      "openvas"
+    ],
+    "source_count": 2,
+    "classification": "agreed",
+    "contradicted": false,
+    "severity": "medium",
+    "confidence": 0.9,
+    "flaw": "smb-signing",
+    "service": [
+      445
+    ],
+    "findings": [
+      "F-NES-57608",
+      "F-OV-005"
+    ],
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N",
+        "base_score": 5.3
+      }
+    ]
+  },
+  {
+    "merged_id": "V-0008",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "nessus",
+      "openvas"
+    ],
+    "source_count": 2,
+    "classification": "agreed",
+    "contradicted": false,
+    "severity": "medium",
+    "confidence": 0.9,
+    "flaw": "sweet32",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NES-42873",
+      "F-OV-006"
+    ],
+    "cve": [
+      "CVE-2016-2183"
+    ],
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+        "base_score": 5.9
+      }
+    ]
+  },
+  {
+    "merged_id": "V-0009",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "medium",
+    "confidence": 0.7,
+    "flaw": "ssh-user-enum",
+    "service": [
+      22
+    ],
+    "findings": [
+      "F-OV-011"
+    ],
+    "cve": [
+      "CVE-2018-15473"
+    ],
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+        "base_score": 5.3
+      }
+    ],
+    "coverage_gap": true
+  },
+  {
+    "merged_id": "V-0010",
+    "asset": "internal-api.aurumpay.example",
+    "sources": [
+      "nessus"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "critical",
+    "confidence": 0.9,
+    "flaw": "actuator-debug",
+    "service": [
+      8080
+    ],
+    "findings": [
+      "F-NES-219"
+    ],
+    "cve": [
+      "CVE-2022-22965"
+    ],
+    "location": "/internal/debug",
+    "vectors": [
+      {
+        "version": "4.0",
+        "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:L/VA:N/SC:N/SI:N/SA:N",
+        "base_score": 8.8
+      }
+    ],
+    "coverage_gap": true
+  },
+  {
+    "merged_id": "V-0011",
+    "asset": "mon-01.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "low",
+    "confidence": 0.7,
+    "flaw": "cert-cn-mismatch",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-OV-018"
+    ]
+  },
+  {
+    "merged_id": "V-0012",
+    "asset": "mon-01.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "medium",
+    "confidence": 0.8,
+    "flaw": "sweet32",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-OV-007"
+    ],
+    "cve": [
+      "CVE-2016-2183"
+    ],
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+        "base_score": 5.9
+      }
+    ],
+    "coverage_gap": true
+  },
+  {
+    "merged_id": "V-0013",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "medium",
+    "confidence": 0.8,
+    "flaw": "admin|administrative|exposed|interface|might|still",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-008"
+    ],
+    "location": "/admin-old/"
+  },
+  {
+    "merged_id": "V-0014",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.2,
+    "flaw": "allowed|http|methods|options|post|trace",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-010"
+    ],
+    "location": "/"
+  },
+  {
+    "merged_id": "V-0015",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "contested",
+    "contradicted": true,
+    "severity": "low",
+    "confidence": 0.7,
+    "flaw": "cert-expiry",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-OV-003"
+    ]
+  },
+  {
+    "merged_id": "V-0016",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "low",
+    "confidence": 0.7,
+    "flaw": "cipher|class|deprecated|header|noise|offered",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-OV-009"
+    ]
+  },
+  {
+    "merged_id": "V-0017",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.2,
+    "flaw": "cookie-flags",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-004",
+      "F-NIK-005"
+    ],
+    "location": "/"
+  },
+  {
+    "merged_id": "V-0018",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "high",
+    "confidence": 0.85,
+    "flaw": "diagnostics-console",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-014"
+    ],
+    "location": "/internal/diagnostics.php"
+  },
+  {
+    "merged_id": "V-0019",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "low",
+    "confidence": 0.4,
+    "flaw": "directory-indexing",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-009"
+    ],
+    "location": "/backup/"
+  },
+  {
+    "merged_id": "V-0020",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.2,
+    "flaw": "etag-inode",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-006"
+    ],
+    "location": "/"
+  },
+  {
+    "merged_id": "V-0021",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.2,
+    "flaw": "header|powered|retrieved",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-001"
+    ],
+    "location": "/"
+  },
+  {
+    "merged_id": "V-0022",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.7,
+    "flaw": "http-redirect",
+    "service": [
+      80
+    ],
+    "findings": [
+      "F-OV-016"
+    ]
+  },
+  {
+    "merged_id": "V-0023",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "low",
+    "confidence": 0.35,
+    "flaw": "http-trace",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-007"
+    ],
+    "location": "/"
+  },
+  {
+    "merged_id": "V-0024",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "low",
+    "confidence": 0.7,
+    "flaw": "icmp-timestamp",
+    "service": [],
+    "findings": [
+      "F-OV-002"
+    ]
+  },
+  {
+    "merged_id": "V-0025",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.2,
+    "flaw": "jquery-outdated",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-012"
+    ],
+    "location": "/static/js/jquery.js"
+  },
+  {
+    "merged_id": "V-0026",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.2,
+    "flaw": "missing-headers",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-002",
+      "F-NIK-003"
+    ],
+    "location": "/"
+  },
+  {
+    "merged_id": "V-0027",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nessus"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.5,
+    "flaw": "open-port",
+    "service": [
+      80
+    ],
+    "findings": [
+      "F-NES-11219"
+    ]
+  },
+  {
+    "merged_id": "V-0028",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.2,
+    "flaw": "outdated-server",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NIK-011"
+    ],
+    "location": "/"
+  },
+  {
+    "merged_id": "V-0029",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.7,
+    "flaw": "tcp-timestamps",
+    "service": [],
+    "findings": [
+      "F-OV-001"
+    ]
+  },
+  {
+    "merged_id": "V-0030",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "info",
+    "confidence": 0.7,
+    "flaw": "traceroute",
+    "service": [],
+    "findings": [
+      "F-OV-014"
+    ]
+  },
+  {
+    "merged_id": "V-0031",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "contested",
+    "contradicted": true,
+    "severity": "low",
+    "confidence": 0.3,
+    "flaw": "poodle",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-OV-012"
+    ],
+    "cve": [
+      "CVE-2014-3566"
+    ],
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+        "base_score": 3.4
+      }
+    ]
+  },
+  {
+    "merged_id": "V-0032",
+    "asset": "shop.aurumpay.example",
+    "sources": [
+      "nessus",
+      "nikto",
+      "openvas"
+    ],
+    "source_count": 3,
+    "classification": "agreed",
+    "contradicted": false,
+    "severity": "critical",
+    "confidence": 0.95,
+    "flaw": "log4shell",
+    "service": [
+      443
+    ],
+    "findings": [
+      "F-NES-156000",
+      "F-NIK-013",
+      "F-OV-004"
+    ],
+    "cve": [
+      "CVE-2021-44228"
+    ],
+    "location": "/checkout",
+    "vectors": [
+      {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10.0
+      }
+    ]
+  },
+  {
+    "merged_id": "V-0033",
+    "asset": "www.aurumpay.example",
+    "sources": [
+      "nikto"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "low",
+    "confidence": 0.4,
+    "flaw": "directory-indexing",
+    "service": [
+      80
+    ],
+    "findings": [
+      "F-NIK-015"
+    ],
+    "location": "/img/"
+  },
+  {
+    "merged_id": "V-0034",
+    "asset": "www.aurumpay.example",
+    "sources": [
+      "openvas"
+    ],
+    "source_count": 1,
+    "classification": "unique",
+    "contradicted": false,
+    "severity": "low",
+    "confidence": 0.7,
+    "flaw": "jquery-outdated",
+    "service": [
+      80
+    ],
+    "findings": [
+      "F-OV-010"
+    ]
+  }
+]

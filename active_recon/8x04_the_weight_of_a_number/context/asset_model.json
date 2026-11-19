@@ -1,0 +1,85 @@
+{
+  "estate": "Aurum Pay (São Paulo payment processor)",
+  "generated_for": "8x04 the weight of a number",
+  "note": "security_requirements drive CVSS environmental CR/IR/AR; network_position and lifecycle drive the modified attack vector and blast-radius reassessment. Hostname and ip let correlation recognise one asset across scanners that name it differently.",
+  "assets": [
+    {
+      "asset": "db.aurumpay.example",
+      "ip": "10.20.3.12",
+      "business_role": "cardholder data environment / payment database",
+      "criticality": "critical",
+      "security_requirements": {"C": "H", "I": "H", "A": "H"},
+      "confidentiality_requirement": "high",
+      "integrity_requirement": "high",
+      "availability_requirement": "high",
+      "internet_exposed": false,
+      "network_position": "internal-reachable",
+      "lifecycle": "active"
+    },
+    {
+      "asset": "shop.aurumpay.example",
+      "ip": "10.20.1.20",
+      "business_role": "customer-facing payment web application",
+      "criticality": "high",
+      "security_requirements": {"C": "H", "I": "H", "A": "M"},
+      "confidentiality_requirement": "high",
+      "integrity_requirement": "high",
+      "availability_requirement": "medium",
+      "internet_exposed": true,
+      "network_position": "internet-facing",
+      "lifecycle": "active"
+    },
+    {
+      "asset": "internal-api.aurumpay.example",
+      "ip": "10.20.2.15",
+      "business_role": "internal services API (Java)",
+      "criticality": "medium",
+      "security_requirements": {"C": "M", "I": "M", "A": "M"},
+      "confidentiality_requirement": "medium",
+      "integrity_requirement": "medium",
+      "availability_requirement": "medium",
+      "internet_exposed": false,
+      "network_position": "internal-reachable",
+      "lifecycle": "active"
+    },
+    {
+      "asset": "www.aurumpay.example",
+      "ip": "10.20.1.10",
+      "business_role": "marketing site",
+      "criticality": "low",
+      "security_requirements": {"C": "L", "I": "L", "A": "L"},
+      "confidentiality_requirement": "low",
+      "integrity_requirement": "low",
+      "availability_requirement": "low",
+      "internet_exposed": true,
+      "network_position": "internet-facing",
+      "lifecycle": "active"
+    },
+    {
+      "asset": "mon-01.aurumpay.example",
+      "ip": "10.20.4.30",
+      "business_role": "peripheral monitoring host",
+      "criticality": "low",
+      "security_requirements": {"C": "L", "I": "L", "A": "L"},
+      "confidentiality_requirement": "low",
+      "integrity_requirement": "low",
+      "availability_requirement": "low",
+      "internet_exposed": false,
+      "network_position": "internal-reachable",
+      "lifecycle": "active"
+    },
+    {
+      "asset": "decom-07.aurumpay.example",
+      "ip": "10.20.9.7",
+      "business_role": "former batch host, decommissioned and network-isolated",
+      "criticality": "low",
+      "security_requirements": {"C": "L", "I": "L", "A": "L"},
+      "confidentiality_requirement": "low",
+      "integrity_requirement": "low",
+      "availability_requirement": "low",
+      "internet_exposed": false,
+      "network_position": "isolated",
+      "lifecycle": "decommissioned"
+    }
+  ]
+}
