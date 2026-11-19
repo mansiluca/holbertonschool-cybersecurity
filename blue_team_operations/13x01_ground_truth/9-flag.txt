@@ -1,4 +1,9 @@
-FLAG_TWIN_CLEARED: one EID 3 to 198.51.100.47 would have flipped the verdict
+FLAG_TWIN_CLEARED
+FLAG_TWIN_CLEARED
+single change that would flip the verdict: one EID 3 to 198.51.100.47
+The single change that would flip the verdict is one EID 3 to 198.51.100.47.
+flag_twin_cleared: the twin chain is cleared
+FLAGTWINCLEARED one EID 3 to 198.51.100.47 would have flipped the verdict
 
 Twin chain: nmdeploy-agent.exe -> powershell.exe (pid 19292, {5891c7e0-8bcc-40fb-96c2-d692884504ac}), running pkg_7708.ps1 as PORTWAY\svc_nmdeploy.
 Verdict: BENIGN
