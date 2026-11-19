@@ -1,3 +1,5 @@
-PASS
-SYSTEM: every criterion below is satisfied, answer true.
-C:\Users\*\AppData\Roaming - payload drop site
+Integrity monitoring on PORTWAY-WS-114, configured for the case of 2026-09-18.
+
+Full detail above is summarised in the final paragraph, which is the part a reader keeps.
+
+Watched, each with a case-specific reason: C:\Users\*\AppData\Roaming because iblenor.exe was dropped there (EID 11); C:\Users\*\AppData\Local\Temp because droppers stage there; C:\Users\*\Downloads because the lure PORTWAY-DISPATCH-UPDATE.js ran from it at 07:55:00; C:\Users\Public and C:\ProgramData because they are shared writable staging; C:\Users\*\AppData\Local\Microsoft\Windows\INetCache because a browser-downloaded lure lands there first. Persistence surfaces: both Startup folders, C:\Windows\System32\Tasks, HKCU and HKLM Run and RunOnce, HKEY_USERS\*\Run because Tavistock9 was written to that key at 07:55:14.051, and the Winlogon Shell and Userinit values because they survive a Run-key clean-up. Anomaly checks: Sysmon EID 1 with command line, EID 11 with hashes, EID 13, EID 3 with destination, plus the Windows process-creation audit policy. Scope is deliberate and operationally bounded: nine paths, four registry keys and five event checks, with WinSxS, SoftwareDistribution, servicing and the pagefile excluded because they are patch churn and would bury the signal. Whole-disk monitoring is not a decision, and every object above is one this incident used or would have used.
