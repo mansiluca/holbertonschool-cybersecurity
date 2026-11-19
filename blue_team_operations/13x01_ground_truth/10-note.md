@@ -76,15 +76,16 @@ fails.
    adversary re-establishes persistence the same way.
 2. **Block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway**,
    organisation-wide. Stops: this implant and any sibling copy calling home. Business
-   cost: none, nothing legitimate resolves there. Visibility cost: the beacon itself,
-   since failures tell me less than successes did.
+   cost: none, nothing legitimate resolves there. Visibility cost: the beacon's successes,
+   since failures tell me less. Worth it: yes, because a blocked destination still logs
+   every attempt, so I keep the timing signal without letting them work.
 3. **Isolate `PORTWAY-WS-114` at the switch, keeping remote management access.** Stops:
    lateral movement off a host with an interactive intrusion. Business cost: a dispatch
    workstation's shift, which is a business cost and not an IT one if it is the only
-   station on that shift. Visibility cost: live telemetry from the host, which is why I
-   would rather do it deliberately than reflexively.
+   station on that shift. Visibility cost: live telemetry from the host. Worth it: only
+   when a trigger fires, which is why it is action three and not action one.
 
-With a fourth slot I would take a memory capture of `iblenor.exe` and live response
+**FOURTH SLOT, if I had one:** a memory capture of `iblenor.exe` and live response
 collection instead of re-imaging. It lost because it is slow, it needs a tool nobody has
 deployed on this estate yet, and the artefacts I need are already in telemetry: hashes
 on EID 11, the ProcessGuid chain on EID 1, the destination on EID 3. Collection adds
@@ -93,9 +94,9 @@ hosts, not for stopping this one.
 
 ## Cut now or watch
 
-My call: **watch, for one shift, with a decision at the end of it.** Cut the C2 at the
-network now, leave the host running and monitored, and hold the isolation decision until
-shift change unless a trigger fires.
+MY CALL: **watch, bounded to one shift, with a decision at the end of it.** Cut the C2 at
+the network now, leave the host running and monitored, and hold the isolation decision
+until shift change unless a trigger fires.
 
 Cutting the beacon ends the exposure and ends my view in the same moment. I stop seeing
 what the implant tries next, whether it fetches a second stage, and which other hosts it
@@ -104,7 +105,7 @@ host was compromised, but how far they got. Blocking the destination while leavi
 persistence in place lets them keep trying and keeps failing, and the failures are
 evidence.
 
-The triggers that end the watching: a second-stage fetch attempt, any EID 3 from this host
+TRIGGERS that end the watching: a second-stage fetch attempt, any EID 3 from this host
 to another internal subnet, or a second workstation appearing with the same destination.
 Any of those and I isolate immediately, because at that point containment beats the view.
 If nothing fires in the window, I isolate and re-image with the artefacts in hand and the
