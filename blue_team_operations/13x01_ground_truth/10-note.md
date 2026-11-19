@@ -69,34 +69,34 @@ clearance fails. It is cleared, not quietly escalated.
 
 ## Containment, three actions
 
-Three actions, each one written as stops / interrupts / costs.
+Three actions, no more, each with what it costs.
 
-**Action 1: disable the autorun value `HKCU\...\Run\Tavistock9`, after exporting the key for
-evidence.** It stops iblenor.exe being re-executed at the next logon. It interrupts a legitimate
-function, because the workstation's logon profile changes and any other autorun in that hive
-stops firing until we have proven Tavistock9 was the only value, so a user who relied on a
-per-user startup item starts it by hand for one shift. It costs visibility into whether the
-adversary re-establishes persistence by the same primitive.
+**1. Disable the autorun value `HKCU\...\Run\Tavistock9`, after exporting the key for evidence.**
+- Stops: iblenor.exe returning at the next logon.
+- Business function interrupted: none. The user's session and the dispatch software keep running.
+- Visibility lost: whether the adversary re-establishes persistence by the same primitive.
 
-**Action 2: block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway.** It
-stops this implant and any sibling copy calling home. It interrupts a legitimate function if the
-block is written as a wildcard over `*-sync.example`, which would also break ordinary CDN traffic
-on neighbouring names; written as the exact host and IP it interrupts nothing. It costs the
-beacon's successful check-ins, though blocked attempts still log timing, and it turns every other
-Portway workstation into a detector for the same infrastructure.
+**2. Block `cdn-halcyon-sync.example` and `198.51.100.47:443` at the egress gateway,
+organisation-wide.**
+- Stops: this implant, and any sibling copy of it, calling home.
+- Business function interrupted: none. Nothing legitimate resolves there.
+- Visibility lost: the beacon's successful check-ins. Blocked attempts still log, so I keep the
+  timing signal, and every other Portway workstation becomes a detector for the same
+  infrastructure.
 
-**Action 3: isolate `PORTWAY-WS-114` at the switch, keeping remote management access.** It stops
-lateral movement off a host with an interactive intrusion. It interrupts the dispatch shift that
-runs on that station, which is a business cost and not an IT one, and if it is the only station
-on the shift then the shift stops rather than slows. It costs live telemetry from the host.
+**3. Isolate `PORTWAY-WS-114` at the switch, keeping remote management access.**
+- Stops: lateral movement off a host that has had an interactive intrusion.
+- Business function interrupted: a dispatch shift, which is a business cost and not an IT one if
+  this is the only station on that shift.
+- Visibility lost: live telemetry from the host.
 
-**Fourth slot, and why it lost on comparison:** memory capture of `iblenor.exe` and live response
-collection instead of re-imaging. Against actions 1 and 2 it is slower and needs a tool nobody
-has deployed on this estate, while both of those are free to the business and take minutes.
-Against action 3 it buys attribution instead of containment, and the artefacts it would recover
-are already documented: the hash is on the EID 11, the chain on the EID 1, the destination on the
-EID 3. Isolation stops movement; collection only explains it, and explanation is the cheaper of
-the two to obtain later.
+**The fourth slot: memory capture of `iblenor.exe` and live response collection instead of
+re-imaging.** It ranked below the three on comparison, not on the limit. Against 1 and 2 it costs
+time and needs a tool nobody has deployed on this estate, while both of those are free to the
+business and take minutes. Against 3 it buys attribution rather than containment, and the
+artefacts it would recover are already documented: the hash is on the EID 11, the chain on the
+EID 1, the destination on the EID 3. If I had to spend a slot on evidence over control, 3 would
+still outrank it, because isolating stops movement while collection only explains it.
 
 ## Cut now or watch
 
