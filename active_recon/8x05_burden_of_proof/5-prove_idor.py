@@ -58,8 +58,11 @@ def emit(result):
     print(json.dumps(result, indent=2))
 
 
-ENDPOINT = "/api/v1/invoices/1041"
-OWNER = "test-user-b"
+# two principals, one object: A asks for what belongs to B and should be denied
+PRINCIPAL_A = "test-user-a"
+PRINCIPAL_B = "test-user-b"
+OBJECT_ID = 1041
+ENDPOINT = "/api/v1/invoices/%d" % OBJECT_ID
 
 
 def login(base, user, password):
@@ -78,7 +81,7 @@ def login(base, user, password):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--target", required=True)
-    parser.add_argument("--user", default="test-user-a")
+    parser.add_argument("--user", default=PRINCIPAL_A)
     parser.add_argument("--password", default="HalcyonTestA!")
     args = parser.parse_args()
     base = args.target.rstrip("/")
@@ -87,8 +90,10 @@ def main():
     status, _, body = fetch(base + ENDPOINT, session=session)
 
     evidence = {
-        "as_principal": args.user,
-        "requested_object": "invoice 1041, owned by %s" % OWNER,
+        "principal_a": args.user,
+        "principal_b": PRINCIPAL_B,
+        "requested_object": "invoice %d, owned_by %s"
+        % (OBJECT_ID, PRINCIPAL_B),
         "result": "no answer",
     }
     verdict = "unconfirmed"
