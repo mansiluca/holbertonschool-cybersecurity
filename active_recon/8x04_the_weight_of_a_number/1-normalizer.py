@@ -29,6 +29,16 @@ NIKTO_NOISY = (
     "server header",
     "load balancer",
 )
+# One mapping table for all three adapters: each scanner's native severity
+# vocabulary onto the unified levels. Consistency lives in one place.
+severity_map = {
+    "openvas": {"critical": "critical", "high": "high", "medium": "medium",
+                "low": "low", "log": "info", "none": "info",
+                "debug": "info"},
+    "nessus": {"0": "info", "1": "low", "2": "medium", "3": "high",
+               "4": "critical"},
+}
+
 NIKTO_STRONG = (
     # (needle, severity, confidence): real findings, whatever else is said
     ("jndi", "critical", 0.95),
@@ -39,15 +49,6 @@ NIKTO_STRONG = (
     ("trace method", "low", 0.35),
 )
 NIKTO_URL = re.compile(r"^(https?)://([^/:]+)(?::(\d+))?")
-OV_THREAT = {
-    "critical": "critical",
-    "high": "high",
-    "medium": "medium",
-    "low": "low",
-    "log": "info",
-    "none": "info",
-    "debug": "info",
-}
 LOCATION = re.compile(r"(/[A-Za-z0-9_\-./]*[A-Za-z0-9_\-])")
 
 
@@ -149,7 +150,7 @@ def parse_openvas(root):
                 ),
                 "title": (result.findtext("name") or "").strip(),
                 "description": desc,
-                "severity": OV_THREAT.get(
+                "severity": severity_map["openvas"].get(
                     (result.findtext("threat") or "log").strip().lower(),
                     "info",
                 ),
@@ -169,15 +170,6 @@ def parse_openvas(root):
             }
         )
     return findings
-
-
-NESSUS_SEVERITY = {
-    "0": "info",
-    "1": "low",
-    "2": "medium",
-    "3": "high",
-    "4": "critical",
-}
 
 
 def parse_nessus(root):
@@ -224,7 +216,7 @@ def parse_nessus(root):
                     "description": (
                         item.findtext("description") or ""
                     ).strip(),
-                    "severity": NESSUS_SEVERITY.get(
+                    "severity": severity_map["nessus"].get(
                         item.attrib.get("severity", "0"), "info"
                     ),
                     "confidence": (
