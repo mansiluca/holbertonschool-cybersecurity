@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""Merge the same flaw across scanners, then classify by agreement.
-
-Matching is on the underlying vulnerability, not on the title a scanner chose:
-the same CVE on the same asset is one finding, and a flaw with no CVE is matched
-on its asset plus its service plus the flaw class recognised in its text. Scanners
-name one asset differently, so the asset model resolves hostname and address to
-one canonical name before anything is compared.
+"""
+Merge the same flaw across scanners, then classify by agreement. Matching is on
+the underlying vulnerability, not on the title a scanner chose: the same CVE on
+the same asset is one finding, and a flaw with no CVE is matched on its asset,
+its service and the flaw class recognised in its text. Scanners name one asset
+differently, so the asset model resolves hostname and address to one canonical
+name before anything is compared.
 """
 import json
 import os
@@ -15,7 +15,10 @@ import sys
 FLAW_SIGNATURES = (
     ("log4shell", ("log4j", "jndi", "log4shell", "message lookup")),
     ("sweet32", ("sweet32", "64-bit block", "3des")),
-    ("smb-signing", ("smb signing", "signing is not required", "signing disabled")),
+    (
+        "smb-signing",
+        ("smb signing", "signing is not required", "signing disabled"),
+    ),
     ("smb-null-session", ("null session", "anonymous smb")),
     ("http-sys-ms15-034", ("http.sys", "ms15-034")),
     ("poodle", ("poodle", "sslv3")),
@@ -30,7 +33,10 @@ FLAW_SIGNATURES = (
     ("directory-indexing", ("directory indexing", "index of /")),
     ("http-trace", ("trace method", "xst")),
     ("cookie-flags", ("httponly", "secure flag")),
-    ("missing-headers", ("x-frame-options", "x-content-type-options", "x-xss-protection")),
+    (
+        "missing-headers",
+        ("x-frame-options", "x-content-type-options", "x-xss-protection"),
+    ),
     ("etag-inode", ("etag", "inode")),
     ("outdated-server", ("appears to be outdated", "outdated")),
     ("tcp-timestamps", ("tcp timestamps",)),
@@ -39,12 +45,18 @@ FLAW_SIGNATURES = (
     ("http-redirect", ("redirects to 443", "http to https")),
     ("open-port", ("open port",)),
 )
-# A flaw that asserts the state of a service (protocol, cipher, certificate) can
-# be contradicted by another scanner that inspected the same port and said
+# A flaw that asserts the state of a service (protocol, cipher, certificate)
+# can be contradicted by another scanner that inspected the same port and said
 # nothing. A flaw that asserts the existence of a resource or a header cannot:
 # silence there is not evidence.
-CONTRADICTABLE = ("poodle", "sweet32", "tls-legacy-mode", "cert-expiry",
-                  "cert-self-signed", "cert-cn-mismatch")
+CONTRADICTABLE = (
+    "poodle",
+    "sweet32",
+    "tls-legacy-mode",
+    "cert-expiry",
+    "cert-self-signed",
+    "cert-cn-mismatch",
+)
 
 
 def flaw_class(*texts):
@@ -108,18 +120,33 @@ def main():
         cves = tuple(sorted(finding.get("cve") or []))
         flaw = flaw_class(finding.get("title"), finding.get("description"))
         key = (asset, cves, flaw)
-        group = groups.setdefault(key, {"asset": asset, "cve": cves, "flaw": flaw,
-                                        "sources": set(), "findings": [],
-                                        "ports": set(), "confidence": 0.0,
-                                        "severity": "info", "locations": set(),
-                                        "titles": set(), "vectors": {}})
+        group = groups.setdefault(
+            key,
+            {
+                "asset": asset,
+                "cve": cves,
+                "flaw": flaw,
+                "sources": set(),
+                "findings": [],
+                "ports": set(),
+                "confidence": 0.0,
+                "severity": "info",
+                "locations": set(),
+                "titles": set(),
+                "vectors": {},
+            },
+        )
         group["sources"].add(finding.get("source"))
         group["findings"].append(finding.get("id"))
         if finding.get("port"):
             group["ports"].add(finding["port"])
-        group["confidence"] = max(group["confidence"], float(finding.get("confidence") or 0))
+        group["confidence"] = max(
+            group["confidence"], float(finding.get("confidence") or 0)
+        )
         rank = {"info": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
-        if rank.get(finding.get("severity"), 0) > rank.get(group["severity"], 0):
+        if rank.get(finding.get("severity"), 0) > rank.get(
+            group["severity"], 0
+        ):
             group["severity"] = finding.get("severity")
         if finding.get("location"):
             group["locations"].add(finding["location"])
@@ -127,9 +154,11 @@ def main():
             group["titles"].add(finding["title"])
         cvss = finding.get("cvss")
         if cvss and cvss.get("vector"):
-            group["vectors"][cvss["vector"]] = {"version": cvss.get("version"),
-                                                "vector": cvss["vector"],
-                                                "base_score": cvss.get("base_score")}
+            group["vectors"][cvss["vector"]] = {
+                "version": cvss.get("version"),
+                "vector": cvss["vector"],
+                "base_score": cvss.get("base_score"),
+            }
 
     merged = []
     for key in sorted(groups, key=lambda k: (k[0], k[1], k[2])):
@@ -138,7 +167,10 @@ def main():
         contested = False
         if group["flaw"] in CONTRADICTABLE:
             for port in group["ports"] or {None}:
-                others = scanned.get((group["asset"], port), set()) - group["sources"]
+                others = (
+                    scanned.get((group["asset"], port), set())
+                    - group["sources"]
+                )
                 if others:
                     contested = True
         # Agreed means more than one scanner saw it and no scanner that covered
@@ -168,8 +200,14 @@ def main():
         if group["locations"]:
             entry["location"] = sorted(group["locations"])[0]
         if group["vectors"]:
-            entry["vectors"] = [group["vectors"][v] for v in sorted(group["vectors"])]
-        if classification == "unique" and group["cve"] and group["confidence"] >= 0.70:
+            entry["vectors"] = [
+                group["vectors"][v] for v in sorted(group["vectors"])
+            ]
+        if (
+            classification == "unique"
+            and group["cve"]
+            and group["confidence"] >= 0.70
+        ):
             entry["coverage_gap"] = True
         merged.append(entry)
 

@@ -8,7 +8,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "about|information|nessus|scan",
     "triage": "needs_verification",
     "signal": "single-source-on-crown-jewel",
@@ -31,7 +31,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "tcp-timestamps",
     "triage": "needs_verification",
     "signal": "single-source-on-crown-jewel",
@@ -113,7 +113,7 @@
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.9,
     "sources": [
@@ -130,14 +130,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "cert-self-signed",
     "triage": "suspected_false_positive",
     "signal": "cross-scanner-contradiction",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.7,
     "sources": [
@@ -153,7 +153,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "smb-null-session",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -194,7 +194,7 @@
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.9,
     "sources": [
@@ -232,7 +232,7 @@
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.9,
     "sources": [
@@ -323,7 +323,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "cert-cn-mismatch",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -383,7 +383,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "admin|administrative|exposed|interface|might|still",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -406,14 +406,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "allowed|http|methods|options|post|trace",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.2,
     "sources": [
@@ -429,14 +429,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "cert-expiry",
     "triage": "suspected_false_positive",
     "signal": "cross-scanner-contradiction",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.7,
     "sources": [
@@ -452,7 +452,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "cipher|class|deprecated|header|noise|offered",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -475,14 +475,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "cookie-flags",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.2,
     "sources": [
@@ -498,7 +498,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "diagnostics-console",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -521,14 +521,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "directory-indexing",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.4,
     "sources": [
@@ -544,14 +544,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "etag-inode",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.2,
     "sources": [
@@ -567,14 +567,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "header|powered|retrieved",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.2,
     "sources": [
@@ -590,7 +590,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "http-redirect",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -613,14 +613,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "http-trace",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.35,
     "sources": [
@@ -636,7 +636,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "icmp-timestamp",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -659,14 +659,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "jquery-outdated",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.2,
     "sources": [
@@ -682,14 +682,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "missing-headers",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.2,
     "sources": [
@@ -705,7 +705,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "open-port",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -728,14 +728,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "outdated-server",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.2,
     "sources": [
@@ -751,7 +751,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "tcp-timestamps",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -774,7 +774,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "traceroute",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",
@@ -818,7 +818,7 @@
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.3,
     "sources": [
@@ -855,7 +855,7 @@
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.95,
     "sources": [
@@ -873,14 +873,14 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "directory-indexing",
     "triage": "suspected_false_positive",
     "signal": "low-confidence",
     "verification": {
       "verified": "not-contested",
       "evidence": "triage did not require verification",
-      "target": "127.0.0.1"
+      "target": "db.aurumpay.example"
     },
     "confidence": 0.4,
     "sources": [
@@ -896,7 +896,7 @@
     "vector_version": null,
     "base": null,
     "environmental": null,
-    "note": "no CVSS vector in the scanner output, severity carried as-is",
+    "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "jquery-outdated",
     "triage": "needs_verification",
     "signal": "single-source-coverage-gap",

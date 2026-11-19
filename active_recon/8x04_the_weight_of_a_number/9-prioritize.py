@@ -12,7 +12,12 @@ import json
 import os
 import sys
 
-CRITICALITY_WEIGHT = {"critical": 1.60, "high": 1.00, "medium": 0.90, "low": 0.50}
+CRITICALITY_WEIGHT = {
+    "critical": 1.60,
+    "high": 1.00,
+    "medium": 0.90,
+    "low": 0.50,
+}
 KEV_BOOST = 3.0
 EPSS_WEIGHT = 1.5
 CONFIRMED_BOOST = 0.5
@@ -63,10 +68,15 @@ def priority_label(score, env, kev):
 
 
 def justification(entry, kev, epss, verdict, label):
-    parts = ["environmental %s on %s (%s, %s)" % (
-        entry.get("environmental"), entry.get("asset"),
-        entry.get("criticality") or "unknown criticality",
-        entry.get("lifecycle") or "unknown lifecycle")]
+    parts = [
+        "environmental %s on %s (%s, %s)"
+        % (
+            entry.get("environmental"),
+            entry.get("asset"),
+            entry.get("criticality") or "unknown criticality",
+            entry.get("lifecycle") or "unknown lifecycle",
+        )
+    ]
     if kev:
         parts.append("KEV-listed, exploited in the wild")
     if epss:
@@ -85,7 +95,9 @@ def main():
         print("Error: no such rescored file: %s" % source, file=sys.stderr)
         return 1
     entries = load(source)
-    threat = threat_lookup(load(context_path) if os.path.exists(context_path) else {})
+    threat = threat_lookup(
+        load(context_path) if os.path.exists(context_path) else {}
+    )
 
     scored, cleared = [], []
     for entry in entries:
@@ -94,31 +106,41 @@ def main():
         if (entry.get("triage") or "").lower() == "suspected_false_positive":
             # cleared: it does not belong in the action order, and the client
             # should not spend money on it
-            cleared.append({"merged_id": entry.get("merged_id"), "asset": entry.get("asset"),
-                            "base": entry.get("base"), "environmental": entry.get("environmental"),
-                            "triage": "suspected_false_positive",
-                            "signal": entry.get("signal"),
-                            "cve": entry.get("cve") or []})
+            cleared.append(
+                {
+                    "merged_id": entry.get("merged_id"),
+                    "asset": entry.get("asset"),
+                    "base": entry.get("base"),
+                    "environmental": entry.get("environmental"),
+                    "triage": "suspected_false_positive",
+                    "signal": entry.get("signal"),
+                    "cve": entry.get("cve") or [],
+                }
+            )
             continue
         score, kev, epss, verdict = risk_score(entry, threat)
         label = priority_label(score, entry.get("environmental"), kev)
-        scored.append({
-            "merged_id": entry.get("merged_id"),
-            "asset": entry.get("asset"),
-            "base": entry.get("base"),
-            "environmental": entry.get("environmental"),
-            "vector_version": entry.get("vector_version"),
-            "kev": kev,
-            "epss": round(epss, 3),
-            "criticality": entry.get("criticality"),
-            "confidence": entry.get("confidence"),
-            "verification": verdict or "not-contested",
-            "flaw": entry.get("flaw"),
-            "cve": entry.get("cve") or [],
-            "risk_score": score,
-            "priority": label,
-        })
-        scored[-1]["justification"] = justification(entry, kev, epss, verdict, label)
+        scored.append(
+            {
+                "merged_id": entry.get("merged_id"),
+                "asset": entry.get("asset"),
+                "base": entry.get("base"),
+                "environmental": entry.get("environmental"),
+                "vector_version": entry.get("vector_version"),
+                "kev": kev,
+                "epss": round(epss, 3),
+                "criticality": entry.get("criticality"),
+                "confidence": entry.get("confidence"),
+                "verification": verdict or "not-contested",
+                "flaw": entry.get("flaw"),
+                "cve": entry.get("cve") or [],
+                "risk_score": score,
+                "priority": label,
+            }
+        )
+        scored[-1]["justification"] = justification(
+            entry, kev, epss, verdict, label
+        )
 
     by_risk = sorted(scored, key=lambda e: (-e["risk_score"], e["merged_id"]))
     for rank, entry in enumerate(by_risk, 1):
@@ -131,36 +153,75 @@ def main():
     for entry in by_risk:
         delta = base_rank[entry["merged_id"]] - entry["rank"]
         if delta >= 3:
-            inversions.append({
-                "merged_id": entry["merged_id"],
-                "asset": entry["asset"],
-                "base_rank": base_rank[entry["merged_id"]],
-                "risk_rank": entry["rank"],
-                "reason": entry["justification"],
-            })
+            inversions.append(
+                {
+                    "merged_id": entry["merged_id"],
+                    "asset": entry["asset"],
+                    "base_rank": base_rank[entry["merged_id"]],
+                    "risk_rank": entry["rank"],
+                    "reason": entry["justification"],
+                }
+            )
     demotions = []
     for entry in by_base:
         if entry["rank"] - base_rank[entry["merged_id"]] >= 3:
-            demotions.append({"merged_id": entry["merged_id"], "asset": entry["asset"],
-                              "base_rank": base_rank[entry["merged_id"]],
-                              "risk_rank": entry["rank"], "reason": entry["justification"]})
+            demotions.append(
+                {
+                    "merged_id": entry["merged_id"],
+                    "asset": entry["asset"],
+                    "base_rank": base_rank[entry["merged_id"]],
+                    "risk_rank": entry["rank"],
+                    "reason": entry["justification"],
+                }
+            )
 
-    payload = {"order": by_risk, "cleared": cleared, "inversions": inversions,
-               "demotions": demotions, "base_order": [e["merged_id"] for e in by_base]}
+    payload = {
+        "order": by_risk,
+        "cleared": cleared,
+        "inversions": inversions,
+        "demotions": demotions,
+        "base_order": [e["merged_id"] for e in by_base],
+    }
     text = json.dumps(payload, indent=2)
     if "--write" in sys.argv:
         os.makedirs("outputs", exist_ok=True)
         with open(os.path.join("outputs", "priority.json"), "w") as handle:
             handle.write(text + "\n")
-        with open(os.path.join("outputs", "priority.csv"), "w", newline="") as handle:
+        with open(
+            os.path.join("outputs", "priority.csv"), "w", newline=""
+        ) as handle:
             writer = csv.writer(handle)
-            writer.writerow(["rank", "merged_id", "asset", "base", "environmental", "kev",
-                             "epss", "confidence", "verification", "priority", "justification"])
+            writer.writerow(
+                [
+                    "rank",
+                    "merged_id",
+                    "asset",
+                    "base",
+                    "environmental",
+                    "kev",
+                    "epss",
+                    "confidence",
+                    "verification",
+                    "priority",
+                    "justification",
+                ]
+            )
             for entry in by_risk:
-                writer.writerow([entry["rank"], entry["merged_id"], entry["asset"],
-                                 entry["base"], entry["environmental"], str(entry["kev"]).lower(),
-                                 entry["epss"], entry["confidence"], entry["verification"],
-                                 entry["priority"], entry["justification"]])
+                writer.writerow(
+                    [
+                        entry["rank"],
+                        entry["merged_id"],
+                        entry["asset"],
+                        entry["base"],
+                        entry["environmental"],
+                        str(entry["kev"]).lower(),
+                        entry["epss"],
+                        entry["confidence"],
+                        entry["verification"],
+                        entry["priority"],
+                        entry["justification"],
+                    ]
+                )
     print(text)
     return 0
 

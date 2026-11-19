@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""Confirm or refute contested findings against the live estate.
-
-The scanner is not the system. For each finding the triage could not settle, this
-probes the target the finding names and decides on what the service actually
-returns. Safe methods only: GET, and an OPTIONS probe where the finding is about
-methods. Nothing is exploited, nothing is modified.
+"""
+Confirm or refute contested findings against the live estate. The scanner is
+not the system. For each finding triage could not settle, this probes the
+target the finding names and decides on what the service actually returns. Safe
+methods only: GET, plus OPTIONS where the finding is about methods. Nothing is
+exploited, nothing is modified.
 """
 import json
 import os
@@ -31,9 +31,17 @@ def request(url, method="GET"):
     req = urllib.request.Request(url, method=method, headers=UA)
     try:
         with urllib.request.urlopen(req, timeout=6) as response:
-            return response.status, dict(response.headers), response.read().decode("utf-8", "replace")
+            return (
+                response.status,
+                dict(response.headers),
+                response.read().decode("utf-8", "replace"),
+            )
     except urllib.error.HTTPError as exc:
-        return exc.code, dict(exc.headers or {}), exc.read().decode("utf-8", "replace")
+        return (
+            exc.code,
+            dict(exc.headers or {}),
+            exc.read().decode("utf-8", "replace"),
+        )
     except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
         return None, {}, str(exc)
 
@@ -43,37 +51,55 @@ def verdict(finding, target):
     location = finding.get("location")
     flaw = finding.get("flaw") or ""
     if not location:
-        return {"verified": "not-probeable",
-                "evidence": "no resource path in the scanner output to probe",
-                "target": target}
+        return {
+            "verified": "not-probeable",
+            "evidence": "no resource path in the scanner output to probe",
+            "target": target,
+        }
     url = "http://%s:%d%s" % (target, PORT, location)
     status, headers, body = request(url)
     if status is None:
-        return {"verified": "unreachable", "evidence": "no response from %s: %s" % (url, body),
-                "target": target}
+        return {
+            "verified": "unreachable",
+            "evidence": "no response from %s: %s" % (url, body),
+            "target": target,
+        }
     if status == 404:
-        return {"verified": "refuted",
-                "evidence": "claimed resource %s returns 404 on the live host" % location,
-                "target": target}
+        return {
+            "verified": "refuted",
+            "evidence": "claimed resource %s returns 404 on the live host"
+            % location,
+            "target": target,
+        }
     if status >= 500:
-        return {"verified": "refuted",
-                "evidence": "%s answers %d on the live host" % (location, status),
-                "target": target}
+        return {
+            "verified": "refuted",
+            "evidence": "%s answers %d on the live host" % (location, status),
+            "target": target,
+        }
     markers = CONFIRM_MARKERS.get(flaw, ())
     lowered = body.lower()
     hits = [m for m in markers if m in lowered]
     if hits:
-        return {"verified": "confirmed",
-                "evidence": "live response from %s exposes %s" % (location, ", ".join(hits)),
-                "target": target}
+        return {
+            "verified": "confirmed",
+            "evidence": "live response from %s exposes %s"
+            % (location, ", ".join(hits)),
+            "target": target,
+        }
     if status == 200:
-        return {"verified": "refuted",
-                "evidence": "%s answers 200 but the claimed condition is absent from the response"
-                            % location,
-                "target": target}
-    return {"verified": "refuted",
-            "evidence": "%s answers %d, not the claimed state" % (location, status),
-            "target": target}
+        return {
+            "verified": "refuted",
+            "evidence": "%s answers 200 but the claimed condition is absent"
+            % location,
+            "target": target,
+        }
+    return {
+        "verified": "refuted",
+        "evidence": "%s answers %d, not the claimed state"
+        % (location, status),
+        "target": target,
+    }
 
 
 def main():
@@ -84,7 +110,10 @@ def main():
         if arg.startswith("--target"):
             target = arg.split("=", 1)[1] if "=" in arg else None
     if target is None:
-        print("Usage: ./7-verify.py <triaged.json> --target=<host>", file=sys.stderr)
+        print(
+            "Usage: ./7-verify.py <triaged.json> --target=<host>",
+            file=sys.stderr,
+        )
         return 1
     if not os.path.exists(source):
         print("Error: no such triaged file: %s" % source, file=sys.stderr)
@@ -96,11 +125,15 @@ def main():
     for finding in findings:
         entry = dict(finding)
         if finding.get("triage") != "needs_verification":
-            entry["verification"] = {"verified": "not-contested",
-                                     "evidence": "triage did not require verification",
-                                     "target": target}
+            entry["verification"] = {
+                "verified": "not-contested",
+                "evidence": "triage did not require verification",
+                "target": target,
+            }
         else:
-            entry["verification"] = verdict(finding, finding.get("asset") or target)
+            entry["verification"] = verdict(
+                finding, finding.get("asset") or target
+            )
         out.append(entry)
 
     text = json.dumps(out, indent=2)
