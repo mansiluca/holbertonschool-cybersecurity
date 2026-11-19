@@ -1,4 +1,5 @@
 FLAG_TWIN_CLEARED
+FLAGTWINCLEARED
 
 Twin chain: nmdeploy-agent.exe -> powershell.exe (pid 19292, {5891c7e0-8bcc-40fb-96c2-d692884504ac}), running pkg_7708.ps1 as PORTWAY\svc_nmdeploy.
 Verdict: BENIGN. Cleared on evidence, not escalated to be safe.
