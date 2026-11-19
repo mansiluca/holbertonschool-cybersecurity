@@ -1,1 +1,21 @@
-Every enabled location or check has a case-specific reason. TRUE
+C:\Users\*\AppData\Roaming - payload drop site, iblenor.exe written here
+C:\Users\*\AppData\Local\Temp - dropper staging, nothing legitimate persists
+C:\Users\*\Downloads - entry point of the lure PORTWAY-DISPATCH-UPDATE.js
+C:\Users\*\AppData\Local\Microsoft\Windows\INetCache - browser download cache, lure lands here first
+C:\Users\Public - shared writable drop needing no profile
+C:\Windows\Temp - staging used from a service or admin context
+C:\ProgramData - staging shared with the Northmoor deploy agent
+C:\Users\*\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup - per-user autostart alternative to the Run key
+C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup - all-users autostart, wider blast radius
+C:\Windows\System32\Tasks - scheduled-task store, additions mean persistence
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run - Tavistock9 written here at 07:55:14.051
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run - machine-wide autorun, survives every profile
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce - one-shot autorun, usual second-stage staging
+HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Run - same key in every loaded hive
+HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon - Shell and Userinit survive a Run-key clean-up
+HKLM\System\CurrentControlSet\Services - service creation once local admin is held
+Sysmon EID 1 with command line - lineage is the only thing separating the two powershell chains
+Sysmon EID 11 with hashes - pins a dropped binary to the process that wrote it
+Sysmon EID 13 - registry value set, the persistence itself
+Sysmon EID 3 with destination - 198.51.100.47 versus 10.42.8.0/24 decided pkg_7714
+Windows process-creation audit policy - the trail outlives the agent and the re-image
