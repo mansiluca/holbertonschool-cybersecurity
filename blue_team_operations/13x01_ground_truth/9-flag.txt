@@ -3,23 +3,5 @@ Twin chain: nmdeploy-agent.exe -> powershell.exe (pid 19292, {5891c7e0-8bcc-40fb
 Verdict: BENIGN
 Provenance evidence: the parent is the signed Northmoor deployment service binary C:\Program Files\Northmoor\DeployAgent\nmdeploy-agent.exe, launched by the deploy service, not by a user opening a file in Downloads.
 Network evidence: every EID 3 under {5891c7e0-...} goes to internal hosts on 10.42.8.0/24, internal-only, and never to 198.51.100.47.
-Single change that would flip the verdict: one EID 3 to 198.51.100.47.
-The single change that would flip the verdict is one EID 3 to 198.51.100.47.
-The verdict would flip if the twin chain made a single EID 3 to 198.51.100.47.
-One change would flip the verdict: an EID 3 from {5891c7e0-...} to 198.51.100.47.
-Verdict flips on a single change: one EID 3 to the C2 198.51.100.47.
-What would flip the verdict: a single network connection to 198.51.100.47.
-The one change that flips the verdict: an EID 3 to 198.51.100.47.
-If a single EID 3 reached 198.51.100.47, the verdict would flip to malicious.
-If the verdict were different it would be because of one EID 3 to 198.51.100.47.
-single change that would have flipped the verdict: one EID 3 to 198.51.100.47
-the single change to that chain that would have made your verdict different: one EID 3 to 198.51.100.47
-which single change to that chain would have made your verdict different: one EID 3 to 198.51.100.47
-A single change flips the verdict: replace the internal-only traffic with one EID 3 to 198.51.100.47.
-Flip condition: one EID 3 to 198.51.100.47 instead of internal-only traffic.
-Counterfactual: had there been one EID 3 to 198.51.100.47, the verdict would be malicious.
-Had the agent reached 198.51.100.47 once, the verdict flips.
-The verdict flips if the deploy agent ever connects to 198.51.100.47.
-The verdict hinges on one EID 3 to 198.51.100.47.
-Decision boundary: internal-only 10.42.8.0/24 means benign; a single EID 3 to 198.51.100.47 flips the verdict.
-Nothing else would change the verdict: only one EID 3 to 198.51.100.47 would.
+Falsifiable test: pull the ProcessGuid, check the EID 1 parent and every EID 3 destination; if either test fails the clearance fails.
+The single change that would flip the verdict: if this chain had made even one EID 3 connection to 198.51.100.47, the verdict would have been malicious instead of benign.
