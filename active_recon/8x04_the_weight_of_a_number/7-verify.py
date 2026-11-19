@@ -160,22 +160,45 @@ def main():
         print("Error: no such triaged file: %s" % source, file=sys.stderr)
         return 1
     with open(source) as handle:
-        findings = json.load(handle)
+        pending = json.load(handle)
+
+    # the pending set is what gets probed; the rest of the correlated estate is
+    # carried through so the re-scoring stage still sees every finding
+    findings = pending
+    full = os.path.join(os.path.dirname(source) or ".", "triaged.json")
+    if (os.path.exists(full)
+            and os.path.abspath(full) != os.path.abspath(source)):
+        with open(full) as handle:
+            findings = json.load(handle)
+        probed = {f.get("merged_id") for f in pending}
+        findings = [f for f in findings
+                    if f.get("merged_id") in probed
+                    or f.get("triage") != "needs_verification"]
+        seen = {f.get("merged_id") for f in findings}
+        findings.extend(f for f in pending if f.get("merged_id") not in seen)
 
     out = []
     for finding in findings:
-        entry = dict(finding)
         if finding.get("triage") != "needs_verification":
-            entry["verification"] = {
-                "verified": "not-contested",
-                "evidence": "triage did not require verification",
-                "target": target,
-            }
+            block = {"verified": "not-contested",
+                     "evidence": "triage did not require verification",
+                     "target": target}
         else:
-            entry["verification"] = verdict(
-                finding, finding.get("asset") or target
-            )
-        out.append(entry)
+            block = verdict(finding, finding.get("asset") or target)
+        # one explicit record per finding: the id, the verdict, the evidence
+        out.append({
+            "merged_id": finding.get("merged_id"),
+            "asset": finding.get("asset"),
+            "target": block["target"],
+            "verified": block["verified"],
+            "evidence": block["evidence"],
+            "triage": finding.get("triage"),
+            "signal": finding.get("signal"),
+            "cve": finding.get("cve") or [],
+            "flaw": finding.get("flaw"),
+            "severity": finding.get("severity"),
+            "vectors": finding.get("vectors") or [],
+        })
 
     text = json.dumps(out, indent=2)
     if "--write" in sys.argv:

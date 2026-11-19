@@ -9,16 +9,36 @@
       "kev": true,
       "epss": 0.61,
       "criticality": "critical",
-      "confidence": 0.9,
-      "verification": "unreachable",
+      "confidence": null,
+      "verification": "not-contested",
       "flaw": "tls-legacy-mode",
       "cve": [
         "CVE-2022-0778"
       ],
       "risk_score": 16.23,
       "priority": "critical",
-      "justification": "environmental 7.7 on db.aurumpay.example (critical, active); KEV-listed, exploited in the wild; EPSS 0.61; verification: unreachable; base 6.5 is severity, this is risk -> critical",
+      "justification": "environmental 7.7 on db.aurumpay.example (critical, active); KEV-listed, exploited in the wild; EPSS 0.61; base 6.5 is severity, this is risk -> critical",
       "rank": 1
+    },
+    {
+      "merged_id": "V-0032",
+      "asset": "shop.aurumpay.example",
+      "base": 10.0,
+      "environmental": 10.0,
+      "vector_version": "3.1",
+      "kev": true,
+      "epss": 0.943,
+      "criticality": "high",
+      "confidence": null,
+      "verification": "not-contested",
+      "flaw": "log4shell",
+      "cve": [
+        "CVE-2021-44228"
+      ],
+      "risk_score": 14.41,
+      "priority": "critical",
+      "justification": "environmental 10.0 on shop.aurumpay.example (high, active); KEV-listed, exploited in the wild; EPSS 0.94; base 10.0 is severity, this is risk -> critical",
+      "rank": 2
     },
     {
       "merged_id": "V-0009",
@@ -29,16 +49,16 @@
       "kev": false,
       "epss": 0.09,
       "criticality": "medium",
-      "confidence": 0.7,
-      "verification": "not-probeable",
+      "confidence": null,
+      "verification": "not-contested",
       "flaw": "ssh-user-enum",
       "cve": [
         "CVE-2018-15473"
       ],
       "risk_score": 5.8,
       "priority": "medium",
-      "justification": "environmental 6.3 on internal-api.aurumpay.example (medium, active); EPSS 0.09; verification: not-probeable; base 5.3 is severity, this is risk -> medium",
-      "rank": 2
+      "justification": "environmental 6.3 on internal-api.aurumpay.example (medium, active); EPSS 0.09; base 5.3 is severity, this is risk -> medium",
+      "rank": 3
     },
     {
       "merged_id": "V-0010",
@@ -49,16 +69,54 @@
       "kev": false,
       "epss": 0.305,
       "criticality": "medium",
-      "confidence": 0.9,
-      "verification": "unreachable",
+      "confidence": null,
+      "verification": "not-contested",
       "flaw": "actuator-debug",
       "cve": [
         "CVE-2022-22965"
       ],
       "risk_score": 5.23,
       "priority": "medium",
-      "justification": "environmental 5.3 on internal-api.aurumpay.example (medium, active); EPSS 0.30; verification: unreachable; base 8.8 is severity, this is risk -> medium",
-      "rank": 3
+      "justification": "environmental 5.3 on internal-api.aurumpay.example (medium, active); EPSS 0.30; base 8.8 is severity, this is risk -> medium",
+      "rank": 4
+    },
+    {
+      "merged_id": "V-0008",
+      "asset": "internal-api.aurumpay.example",
+      "base": 5.9,
+      "environmental": 5.0,
+      "vector_version": "3.1",
+      "kev": false,
+      "epss": 0.12,
+      "criticality": "medium",
+      "confidence": null,
+      "verification": "not-contested",
+      "flaw": "sweet32",
+      "cve": [
+        "CVE-2016-2183"
+      ],
+      "risk_score": 4.68,
+      "priority": "low",
+      "justification": "environmental 5.0 on internal-api.aurumpay.example (medium, active); EPSS 0.12; base 5.9 is severity, this is risk -> low",
+      "rank": 5
+    },
+    {
+      "merged_id": "V-0007",
+      "asset": "internal-api.aurumpay.example",
+      "base": 5.3,
+      "environmental": 5.0,
+      "vector_version": "3.1",
+      "kev": false,
+      "epss": 0.0,
+      "criticality": "medium",
+      "confidence": null,
+      "verification": "not-contested",
+      "flaw": "smb-signing",
+      "cve": [],
+      "risk_score": 4.5,
+      "priority": "low",
+      "justification": "environmental 5.0 on internal-api.aurumpay.example (medium, active); base 5.3 is severity, this is risk -> low",
+      "rank": 6
     },
     {
       "merged_id": "V-0012",
@@ -69,25 +127,84 @@
       "kev": false,
       "epss": 0.12,
       "criticality": "low",
-      "confidence": 0.8,
-      "verification": "not-probeable",
+      "confidence": null,
+      "verification": "not-contested",
       "flaw": "sweet32",
       "cve": [
         "CVE-2016-2183"
       ],
       "risk_score": 1.98,
       "priority": "low",
-      "justification": "environmental 3.6 on mon-01.aurumpay.example (low, active); EPSS 0.12; verification: not-probeable; base 5.9 is severity, this is risk -> low",
-      "rank": 4
+      "justification": "environmental 3.6 on mon-01.aurumpay.example (low, active); EPSS 0.12; base 5.9 is severity, this is risk -> low",
+      "rank": 7
+    },
+    {
+      "merged_id": "V-0004",
+      "asset": "decom-07.aurumpay.example",
+      "base": 9.8,
+      "environmental": 3.4,
+      "vector_version": "3.1",
+      "kev": false,
+      "epss": 0.022,
+      "criticality": "low",
+      "confidence": null,
+      "verification": "not-contested",
+      "flaw": "http-sys-ms15-034",
+      "cve": [
+        "CVE-2015-1635"
+      ],
+      "risk_score": 1.73,
+      "priority": "low",
+      "justification": "environmental 3.4 on decom-07.aurumpay.example (low, decommissioned); EPSS 0.02; base 9.8 is severity, this is risk -> low",
+      "rank": 8
     }
   ],
-  "cleared": [],
-  "inversions": [],
-  "demotions": [],
+  "cleared": [
+    {
+      "merged_id": "V-0031",
+      "asset": "shop.aurumpay.example",
+      "base": 3.4,
+      "environmental": 7.5,
+      "triage": "suspected_false_positive",
+      "signal": "cross-scanner-contradiction",
+      "cve": [
+        "CVE-2014-3566"
+      ]
+    }
+  ],
+  "inversions": [
+    {
+      "merged_id": "V-0003",
+      "asset": "db.aurumpay.example",
+      "base_rank": 4,
+      "risk_rank": 1,
+      "reason": "environmental 7.7 on db.aurumpay.example (critical, active); KEV-listed, exploited in the wild; EPSS 0.61; base 6.5 is severity, this is risk -> critical"
+    },
+    {
+      "merged_id": "V-0009",
+      "asset": "internal-api.aurumpay.example",
+      "base_rank": 8,
+      "risk_rank": 3,
+      "reason": "environmental 6.3 on internal-api.aurumpay.example (medium, active); EPSS 0.09; base 5.3 is severity, this is risk -> medium"
+    }
+  ],
+  "demotions": [
+    {
+      "merged_id": "V-0004",
+      "asset": "decom-07.aurumpay.example",
+      "base_rank": 2,
+      "risk_rank": 8,
+      "reason": "environmental 3.4 on decom-07.aurumpay.example (low, decommissioned); EPSS 0.02; base 9.8 is severity, this is risk -> low"
+    }
+  ],
   "base_order": [
+    "V-0032",
+    "V-0004",
     "V-0010",
     "V-0003",
+    "V-0008",
     "V-0012",
+    "V-0007",
     "V-0009"
   ]
 }

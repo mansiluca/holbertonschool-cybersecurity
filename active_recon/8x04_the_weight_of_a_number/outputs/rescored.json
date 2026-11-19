@@ -11,16 +11,7 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "about|information|nessus|scan",
     "triage": "needs_verification",
-    "signal": "single-source-on-crown-jewel",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.5,
-    "sources": [
-      "nessus"
-    ]
+    "signal": "single-source-on-crown-jewel"
   },
   {
     "merged_id": "V-0002",
@@ -34,16 +25,7 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "tcp-timestamps",
     "triage": "needs_verification",
-    "signal": "single-source-on-crown-jewel",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "db.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-on-crown-jewel"
   },
   {
     "merged_id": "V-0003",
@@ -71,16 +53,50 @@
     ],
     "flaw": "tls-legacy-mode",
     "triage": "needs_verification",
-    "signal": "single-source-on-crown-jewel",
-    "verification": {
-      "verified": "unreachable",
-      "evidence": "tcp db.aurumpay.example:8080 refused or timed out ([Errno 8] nodename nor servname provided, or not known)",
-      "target": "db.aurumpay.example"
+    "signal": "single-source-on-crown-jewel"
+  },
+  {
+    "merged_id": "V-0004",
+    "asset": "decom-07.aurumpay.example",
+    "criticality": "low",
+    "network_position": "isolated",
+    "lifecycle": "decommissioned",
+    "vector_version": "3.1",
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "base": 9.8,
+    "environmental": 3.4,
+    "delta": -6.4,
+    "environmental_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H/CR:L/IR:L/AR:L/MAV:L/MAC:H/MC:L/MI:L/MA:L",
+    "environmental_metrics": {
+      "CR": "L",
+      "IR": "L",
+      "AR": "L",
+      "MAV": "L",
+      "MAC": "H",
+      "MC": "L",
+      "MI": "L",
+      "MA": "L"
     },
-    "confidence": 0.9,
-    "sources": [
-      "nessus"
-    ]
+    "cve": [
+      "CVE-2015-1635"
+    ],
+    "flaw": "http-sys-ms15-034",
+    "triage": "trusted",
+    "signal": "cross-scanner-agreement"
+  },
+  {
+    "merged_id": "V-0005",
+    "asset": "internal-api.aurumpay.example",
+    "criticality": "medium",
+    "network_position": "internal-reachable",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "cert-self-signed",
+    "triage": "suspected_false_positive",
+    "signal": "cross-scanner-contradiction"
   },
   {
     "merged_id": "V-0006",
@@ -94,16 +110,60 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "smb-null-session",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "internal-api.aurumpay.example"
+    "signal": "single-source-coverage-gap"
+  },
+  {
+    "merged_id": "V-0007",
+    "asset": "internal-api.aurumpay.example",
+    "criticality": "medium",
+    "network_position": "internal-reachable",
+    "lifecycle": "active",
+    "vector_version": "3.1",
+    "vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N",
+    "base": 5.3,
+    "environmental": 5.0,
+    "delta": -0.3,
+    "environmental_vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N/CR:M/IR:M/AR:M/MAV:A/MC:L/MI:L/MA:L",
+    "environmental_metrics": {
+      "CR": "M",
+      "IR": "M",
+      "AR": "M",
+      "MAV": "A",
+      "MC": "L",
+      "MI": "L",
+      "MA": "L"
     },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "flaw": "smb-signing",
+    "triage": "trusted",
+    "signal": "cross-scanner-agreement"
+  },
+  {
+    "merged_id": "V-0008",
+    "asset": "internal-api.aurumpay.example",
+    "criticality": "medium",
+    "network_position": "internal-reachable",
+    "lifecycle": "active",
+    "vector_version": "3.1",
+    "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "base": 5.9,
+    "environmental": 5.0,
+    "delta": -0.9,
+    "environmental_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N/CR:M/IR:M/AR:M/MAV:A/MC:L/MI:L/MA:L",
+    "environmental_metrics": {
+      "CR": "M",
+      "IR": "M",
+      "AR": "M",
+      "MAV": "A",
+      "MC": "L",
+      "MI": "L",
+      "MA": "L"
+    },
+    "cve": [
+      "CVE-2016-2183"
+    ],
+    "flaw": "sweet32",
+    "triage": "trusted",
+    "signal": "cross-scanner-agreement"
   },
   {
     "merged_id": "V-0009",
@@ -131,16 +191,7 @@
     ],
     "flaw": "ssh-user-enum",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "internal-api.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-coverage-gap"
   },
   {
     "merged_id": "V-0010",
@@ -168,16 +219,7 @@
     ],
     "flaw": "actuator-debug",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "unreachable",
-      "evidence": "tcp internal-api.aurumpay.example:8080 refused or timed out ([Errno 8] nodename nor servname provided, or not known)",
-      "target": "internal-api.aurumpay.example"
-    },
-    "confidence": 0.9,
-    "sources": [
-      "nessus"
-    ]
+    "signal": "single-source-coverage-gap"
   },
   {
     "merged_id": "V-0011",
@@ -191,16 +233,7 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "cert-cn-mismatch",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "mon-01.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-coverage-gap"
   },
   {
     "merged_id": "V-0012",
@@ -228,16 +261,7 @@
     ],
     "flaw": "sweet32",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "mon-01.aurumpay.example"
-    },
-    "confidence": 0.8,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-coverage-gap"
   },
   {
     "merged_id": "V-0013",
@@ -251,16 +275,35 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "admin|administrative|exposed|interface|might|still",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "unreachable",
-      "evidence": "tcp shop.aurumpay.example:8080 refused or timed out ([Errno 8] nodename nor servname provided, or not known)",
-      "target": "shop.aurumpay.example"
-    },
-    "confidence": 0.8,
-    "sources": [
-      "nikto"
-    ]
+    "signal": "single-source-coverage-gap"
+  },
+  {
+    "merged_id": "V-0014",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "allowed|http|methods|options|post|trace",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
+  },
+  {
+    "merged_id": "V-0015",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "cert-expiry",
+    "triage": "suspected_false_positive",
+    "signal": "cross-scanner-contradiction"
   },
   {
     "merged_id": "V-0016",
@@ -274,16 +317,21 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "cipher|class|deprecated|header|noise|offered",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "shop.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-coverage-gap"
+  },
+  {
+    "merged_id": "V-0017",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "cookie-flags",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
   },
   {
     "merged_id": "V-0018",
@@ -297,16 +345,49 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "diagnostics-console",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "unreachable",
-      "evidence": "tcp shop.aurumpay.example:8080 refused or timed out ([Errno 8] nodename nor servname provided, or not known)",
-      "target": "shop.aurumpay.example"
-    },
-    "confidence": 0.85,
-    "sources": [
-      "nikto"
-    ]
+    "signal": "single-source-coverage-gap"
+  },
+  {
+    "merged_id": "V-0019",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "directory-indexing",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
+  },
+  {
+    "merged_id": "V-0020",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "etag-inode",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
+  },
+  {
+    "merged_id": "V-0021",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "header|powered|retrieved",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
   },
   {
     "merged_id": "V-0022",
@@ -320,16 +401,21 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "http-redirect",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "shop.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-coverage-gap"
+  },
+  {
+    "merged_id": "V-0023",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "http-trace",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
   },
   {
     "merged_id": "V-0024",
@@ -343,16 +429,35 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "icmp-timestamp",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "shop.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-coverage-gap"
+  },
+  {
+    "merged_id": "V-0025",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "jquery-outdated",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
+  },
+  {
+    "merged_id": "V-0026",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "missing-headers",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
   },
   {
     "merged_id": "V-0027",
@@ -366,16 +471,21 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "open-port",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "shop.aurumpay.example"
-    },
-    "confidence": 0.5,
-    "sources": [
-      "nessus"
-    ]
+    "signal": "single-source-coverage-gap"
+  },
+  {
+    "merged_id": "V-0028",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "outdated-server",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
   },
   {
     "merged_id": "V-0029",
@@ -389,16 +499,7 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "tcp-timestamps",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "shop.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-coverage-gap"
   },
   {
     "merged_id": "V-0030",
@@ -412,16 +513,77 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "traceroute",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "shop.aurumpay.example"
+    "signal": "single-source-coverage-gap"
+  },
+  {
+    "merged_id": "V-0031",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": "3.1",
+    "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+    "base": 3.4,
+    "environmental": 7.5,
+    "delta": 4.1,
+    "environmental_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N/CR:H/IR:H/AR:M/MAV:N/MC:H/MI:H/MA:L",
+    "environmental_metrics": {
+      "CR": "H",
+      "IR": "H",
+      "AR": "M",
+      "MAV": "N",
+      "MC": "H",
+      "MI": "H",
+      "MA": "L"
     },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "cve": [
+      "CVE-2014-3566"
+    ],
+    "flaw": "poodle",
+    "triage": "suspected_false_positive",
+    "signal": "cross-scanner-contradiction"
+  },
+  {
+    "merged_id": "V-0032",
+    "asset": "shop.aurumpay.example",
+    "criticality": "high",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": "3.1",
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "base": 10.0,
+    "environmental": 10.0,
+    "delta": 0.0,
+    "environmental_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/CR:H/IR:H/AR:M/MAV:N/MC:H/MI:H/MA:L",
+    "environmental_metrics": {
+      "CR": "H",
+      "IR": "H",
+      "AR": "M",
+      "MAV": "N",
+      "MC": "H",
+      "MI": "H",
+      "MA": "L"
+    },
+    "cve": [
+      "CVE-2021-44228"
+    ],
+    "flaw": "log4shell",
+    "triage": "trusted",
+    "signal": "cross-scanner-agreement"
+  },
+  {
+    "merged_id": "V-0033",
+    "asset": "www.aurumpay.example",
+    "criticality": "low",
+    "network_position": "internet-facing",
+    "lifecycle": "active",
+    "vector_version": null,
+    "base": null,
+    "environmental": null,
+    "note": "no CVSS vector in the scanner output, severity as-is",
+    "flaw": "directory-indexing",
+    "triage": "suspected_false_positive",
+    "signal": "low-confidence"
   },
   {
     "merged_id": "V-0034",
@@ -435,15 +597,6 @@
     "note": "no CVSS vector in the scanner output, severity as-is",
     "flaw": "jquery-outdated",
     "triage": "needs_verification",
-    "signal": "single-source-coverage-gap",
-    "verification": {
-      "verified": "not-probeable",
-      "evidence": "no resource path in the scanner output to probe",
-      "target": "www.aurumpay.example"
-    },
-    "confidence": 0.7,
-    "sources": [
-      "openvas"
-    ]
+    "signal": "single-source-coverage-gap"
   }
 ]

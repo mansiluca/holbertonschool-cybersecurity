@@ -1,5 +1,9 @@
 rank,merged_id,asset,base,environmental,kev,epss,confidence,verification,priority,justification
-1,V-0003,db.aurumpay.example,6.5,7.7,true,0.61,0.9,unreachable,critical,"environmental 7.7 on db.aurumpay.example (critical, active); KEV-listed, exploited in the wild; EPSS 0.61; verification: unreachable; base 6.5 is severity, this is risk -> critical"
-2,V-0009,internal-api.aurumpay.example,5.3,6.3,false,0.09,0.7,not-probeable,medium,"environmental 6.3 on internal-api.aurumpay.example (medium, active); EPSS 0.09; verification: not-probeable; base 5.3 is severity, this is risk -> medium"
-3,V-0010,internal-api.aurumpay.example,8.8,5.3,false,0.305,0.9,unreachable,medium,"environmental 5.3 on internal-api.aurumpay.example (medium, active); EPSS 0.30; verification: unreachable; base 8.8 is severity, this is risk -> medium"
-4,V-0012,mon-01.aurumpay.example,5.9,3.6,false,0.12,0.8,not-probeable,low,"environmental 3.6 on mon-01.aurumpay.example (low, active); EPSS 0.12; verification: not-probeable; base 5.9 is severity, this is risk -> low"
+1,V-0003,db.aurumpay.example,6.5,7.7,true,0.61,,not-contested,critical,"environmental 7.7 on db.aurumpay.example (critical, active); KEV-listed, exploited in the wild; EPSS 0.61; base 6.5 is severity, this is risk -> critical"
+2,V-0032,shop.aurumpay.example,10.0,10.0,true,0.943,,not-contested,critical,"environmental 10.0 on shop.aurumpay.example (high, active); KEV-listed, exploited in the wild; EPSS 0.94; base 10.0 is severity, this is risk -> critical"
+3,V-0009,internal-api.aurumpay.example,5.3,6.3,false,0.09,,not-contested,medium,"environmental 6.3 on internal-api.aurumpay.example (medium, active); EPSS 0.09; base 5.3 is severity, this is risk -> medium"
+4,V-0010,internal-api.aurumpay.example,8.8,5.3,false,0.305,,not-contested,medium,"environmental 5.3 on internal-api.aurumpay.example (medium, active); EPSS 0.30; base 8.8 is severity, this is risk -> medium"
+5,V-0008,internal-api.aurumpay.example,5.9,5.0,false,0.12,,not-contested,low,"environmental 5.0 on internal-api.aurumpay.example (medium, active); EPSS 0.12; base 5.9 is severity, this is risk -> low"
+6,V-0007,internal-api.aurumpay.example,5.3,5.0,false,0.0,,not-contested,low,"environmental 5.0 on internal-api.aurumpay.example (medium, active); base 5.3 is severity, this is risk -> low"
+7,V-0012,mon-01.aurumpay.example,5.9,3.6,false,0.12,,not-contested,low,"environmental 3.6 on mon-01.aurumpay.example (low, active); EPSS 0.12; base 5.9 is severity, this is risk -> low"
+8,V-0004,decom-07.aurumpay.example,9.8,3.4,false,0.022,,not-contested,low,"environmental 3.4 on decom-07.aurumpay.example (low, decommissioned); EPSS 0.02; base 9.8 is severity, this is risk -> low"
